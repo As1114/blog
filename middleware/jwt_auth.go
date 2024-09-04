@@ -1,8 +1,8 @@
 package middleware
 
 import (
+	ctype "blog/models/ctypes"
 	"blog/models/res"
-	ctype "blog/models/types"
 	"blog/service/redis_ser"
 	"blog/utils/jwt"
 	"github.com/gin-gonic/gin"

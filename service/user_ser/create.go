@@ -24,6 +24,7 @@ func (u UserService) CreateUser(nickname, account, password, ip string, role cty
 	addr := utils.GetAddrByIp(ip)
 
 	err = global.DB.Create(&models.UserModel{
+		Avatar:   Avatar,
 		Nickname: nickname,
 		Account:  account,
 		Password: hashpwd,

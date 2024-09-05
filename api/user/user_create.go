@@ -17,7 +17,7 @@ type UserCreateRequest struct {
 	Role     ctypes.Role `json:"role" binding:"required" msg:"请选择身份"`
 }
 
-func (u User) Create(c *gin.Context) {
+func (u User) UserCreate(c *gin.Context) {
 	var req UserCreateRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		res.FailWithError(err, &req, c)

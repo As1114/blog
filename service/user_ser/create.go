@@ -4,6 +4,7 @@ import (
 	"blog/global"
 	"blog/models"
 	"blog/models/ctypes"
+	"blog/utils"
 	"blog/utils/pwd"
 )
 
@@ -19,4 +20,18 @@ func (u UserService) CreateUser(nickname, account, password, ip string, role cty
 	}
 	//对密码进行加密
 	hashpwd := pwd.HashPassword(password)
+
+	addr := utils.GetAddrByIp(ip)
+
+	err = global.DB.Create(&models.UserModel{
+		Nickname: nickname,
+		Account:  account,
+		Password: hashpwd,
+		Role:     role,
+		Address:  addr,
+	}).Error
+	if err != nil {
+		global.Log.Error("create user err:", err)
+		return
+	}
 }

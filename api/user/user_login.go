@@ -44,5 +44,6 @@ func (u User) UserLogin(c *gin.Context) {
 		res.FailWithMessage("登录失败", c)
 		return
 	}
+	c.Request.Header.Set("token", token)
 	res.OkWithData(token, c)
 }

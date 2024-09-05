@@ -50,7 +50,7 @@ func JwtAdmin() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		if claims.Role != int(ctype.PermissionAdmin) {
+		if claims.Role != ctype.PermissionAdmin {
 			res.FailWithMessage("权限错误", c)
 			c.Abort()
 			return

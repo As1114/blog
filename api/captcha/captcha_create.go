@@ -20,7 +20,7 @@ type CaptchaResponse struct {
 // @Router /api/captcha [get]
 // @Produce json
 // @Success 200 {object} res.Response{data=CaptchaResponse}
-func (Captcha *Captcha) CreateCaptcha(c *gin.Context) {
+func (Captcha *Captcha) CaptchaCreate(c *gin.Context) {
 	driver := base64Captcha.NewDriverDigit(
 		global.Config.Captcha.ImgHeight,
 		global.Config.Captcha.ImgWidth,

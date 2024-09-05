@@ -6,6 +6,7 @@ import (
 	"blog/global"
 	"blog/routers"
 	"blog/utils"
+	"blog/utils/snowflake"
 	"blog/utils/validator"
 	"fmt"
 	"go.uber.org/zap"
@@ -25,6 +26,7 @@ func main() {
 	global.Es = core.InitEs()
 	global.Etcd = core.InitEtcd()
 	core.InitAddrDB()
+	snowflake.Init(global.Config.System.StartTime, global.Config.System.MachineID)
 	flags.Newflags()
 	err := validator.InitTrans("en")
 	if err != nil {

@@ -7,10 +7,10 @@ import (
 	"net"
 )
 
-func GetAddrByGin(c *gin.Context) (ip, addr string) {
-	ip = c.ClientIP()
+func GetAddrByGin(c *gin.Context) (addr string) {
+	ip := c.ClientIP()
 	addr = GetAddrByIp(ip)
-	return ip, addr
+	return addr
 }
 
 func GetAddrByIp(ip string) string {

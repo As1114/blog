@@ -24,6 +24,7 @@ func main() {
 	global.Redis = core.InitRedis()
 	global.Es = core.InitEs()
 	global.Etcd = core.InitEtcd()
+	core.InitAddrDB()
 	flags.Newflags()
 	err := validator.InitTrans("en")
 	if err != nil {

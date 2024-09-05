@@ -8,7 +8,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var store = base64Captcha.DefaultMemStore
+var Store = base64Captcha.DefaultMemStore
 
 type CaptchaResponse struct {
 	CaptchaID string `json:"captchaId"`
@@ -28,13 +28,12 @@ func (Captcha *Captcha) CaptchaCreate(c *gin.Context) {
 		0.7,
 		70,
 	)
-	captcha := base64Captcha.NewCaptcha(driver, store)
+	captcha := base64Captcha.NewCaptcha(driver, Store)
 	id, b64s, _, err := captcha.Generate()
 	if err != nil {
 		global.Log.Error("fail to generate the captcha", zap.Error(err))
 		return
 	}
-	//验证验证码store.Verify(CaptchaID, Captcha, true)
 	res.OkWithData(CaptchaResponse{
 		CaptchaID: id,
 		PicPath:   b64s,

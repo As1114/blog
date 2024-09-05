@@ -12,9 +12,11 @@ func ParseToken(tokenStr string) (*CustomClaims, error) {
 		return MySecret, nil
 	})
 	if err != nil {
+		global.Log.Error("parse token error:", err)
 		return nil, err
 	}
 	if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
+		global.Log.Error("parse token error:", err)
 		return claims, nil
 	}
 	return nil, errors.New("invalid token")

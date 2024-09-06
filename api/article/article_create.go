@@ -27,7 +27,7 @@ func (a Article) ArticleCreate(c *gin.Context) {
 	}
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*utils.CustomClaims)
-	user_id := claims.UserID
+	userId := claims.UserID
 	html, err := utils.ConvertMarkdownToHTML(req.Content)
 	if err != nil {
 		global.Log.Error("ConvertMarkdownToHTML err:", err)
@@ -57,7 +57,7 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		return
 	}
 	var user models.UserModel
-	err = global.DB.Where("user_id=?", user_id).First(&user).Error
+	err = global.DB.Where("user_id=?", userId).First(&user).Error
 	if err != nil {
 		res.FailWithMessage("用户不存在", c)
 		return
@@ -70,7 +70,7 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		Content:    content,
 		CoverID:    req.CoverID,
 		CoverURL:   coverUrl,
-		UserID:     user_id,
+		UserID:     userId,
 		CreatedAt:  now,
 		UpdatedAt:  now,
 		UserName:   user.Nickname,

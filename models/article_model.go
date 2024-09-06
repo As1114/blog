@@ -174,8 +174,8 @@ func (a ArticleItem) SearchAllDocuments() (result []ArticleItem) {
 	return result
 }
 
-func (a ArticleItem) SearchDocumentMultiMatch(fields []string, key string) (result []ArticleItem) {
-	// 搜索content中包含好评的文档
+func (a ArticleItem) SearchDocumentMultiMatch(fields []string, key string, pageInfo PageInfo) (result []ArticleItem) {
+	form := (pageInfo.Page - 1) * pageInfo.Limit
 	resp, err := global.Es.Search().
 		Index(a.Index()).
 		Query(&types.Query{
@@ -183,7 +183,7 @@ func (a ArticleItem) SearchDocumentMultiMatch(fields []string, key string) (resu
 				Fields: fields,
 				Query:  key,
 			},
-		}).
+		}).From(form).Size(pageInfo.Limit).
 		Do(context.Background())
 	if err != nil {
 		global.Log.Error("search document failed", zap.Error(err))

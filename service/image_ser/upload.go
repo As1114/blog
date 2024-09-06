@@ -4,6 +4,7 @@ import (
 	"blog/global"
 	"blog/utils"
 	"fmt"
+	"io"
 	"mime/multipart"
 	"path"
 	"strings"
@@ -37,13 +38,34 @@ func (ImageService) ImageUploadService(file *multipart.FileHeader) (res FileUplo
 	nameList := strings.Split(fileName, ".")
 	suffix := strings.ToLower(nameList[len(nameList)-1])
 	if !utils.InList(suffix, WhiteList) {
-		res.Msg = "非法文件"
+		res.Msg = "文件格式错误"
 		return
 	}
+
 	// 判断文件大小
 	size := float64(file.Size) / float64(1024*1024)
 	if size >= float64(global.Config.Upload.Size) {
-		res.Msg = fmt.Sprintf("图片大小超过设定大小，当前大小为:%.2fMB， 设定大小为：%dMB ", size, global.Config.Upload.Size)
+		res.Msg = fmt.Sprintf("图片大小超过设定,当前大小为:%.2fMB,设定大小为:%dMB", size, global.Config.Upload.Size)
+		return
+	}
+
+	fileObj, err := file.Open()
+	if err != nil {
+		global.Log.Error(err)
+		return
+	}
+
+	byteData, err := io.ReadAll(fileObj)
+	if err != nil {
+		global.Log.Error(err)
+		return
+	}
+
+	imageHash := utils.Md5(byteData)
+	var bannerModel models.BannerModel
+	if err := global.DB.Where("hash = ?", imageHash).First(&bannerModel).Error; err == nil {
+		res.Msg = "图片已存在"
+		res.FileName = bannerModel.Path
 		return
 	}
 	return

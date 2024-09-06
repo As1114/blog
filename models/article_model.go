@@ -18,7 +18,6 @@ type Article struct {
 	UpdatedAt string `json:"updated_at"` // 更新时间
 
 	Title    string `json:"title"`    // 文章标题
-	Keyword  string `json:"keyword" ` // 关键字
 	Abstract string `json:"abstract"` // 文章简介
 	Content  string `json:"content" ` // 文章内容
 
@@ -33,7 +32,7 @@ type Article struct {
 
 	Category string `json:"category"` // 文章分类
 
-	BannerUrl string `json:"banner_url"` // 文章封面
+	CoverUrl string `json:"banner_url"` // 文章封面
 }
 
 func (a ArticleItem) Index() string {

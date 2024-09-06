@@ -2,11 +2,11 @@ package user_ser
 
 import (
 	"blog/service/redis_ser"
-	"blog/utils/jwt"
+	"blog/utils"
 	"time"
 )
 
-func (UserService) Logout(claims *jwt.CustomClaims, token string) error {
+func (UserService) Logout(claims *utils.CustomClaims, token string) error {
 	exp := claims.ExpiresAt
 	now := time.Now()
 	diff := exp.Time.Sub(now)

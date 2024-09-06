@@ -3,6 +3,7 @@ module blog
 go 1.22.3
 
 require (
+	github.com/JohannesKaufmann/html-to-markdown v1.6.0
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/cc14514/go-geoip2 v0.0.0-20190105051856-0a1854480a11
 	github.com/cc14514/go-geoip2-db v0.0.0-20190106063142-7b6408a9812a
@@ -16,6 +17,7 @@ require (
 	github.com/mojocn/base64Captcha v1.3.6
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/redis/go-redis/v9 v9.6.1
+	github.com/russross/blackfriday v1.6.0
 	github.com/spf13/viper v1.19.0
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
@@ -32,8 +34,10 @@ require (
 require (
 	github.com/BurntSushi/toml v1.4.0 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
+	github.com/PuerkitoBio/goquery v1.9.2 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
+	github.com/andybalholm/cascadia v1.3.2 // indirect
 	github.com/bytedance/sonic v1.11.6 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect

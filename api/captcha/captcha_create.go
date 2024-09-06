@@ -15,7 +15,7 @@ type CaptchaResponse struct {
 	PicPath   string `json:"pic_path"`
 }
 
-// CreateCaptcha 验证码生成
+// CaptchaCreate  验证码生成
 // @Summary 验证码生成
 // @Router /api/captcha [get]
 // @Produce json

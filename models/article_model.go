@@ -32,7 +32,8 @@ type Article struct {
 
 	Category string `json:"category"` // 文章分类
 
-	CoverUrl string `json:"banner_url"` // 文章封面
+	CoverID  uint   `json:"banner_id"`  // 封面id
+	CoverURL string `json:"banner_url"` // 封面
 }
 
 func (a ArticleItem) Index() string {
@@ -40,7 +41,7 @@ func (a ArticleItem) Index() string {
 }
 
 func (a ArticleItem) CreateIndex() {
-	exist := a.ExistsIndex()
+	exist := a.IndexExist()
 	if exist {
 		global.Log.Info("the index already exists")
 		return
@@ -54,8 +55,9 @@ func (a ArticleItem) CreateIndex() {
 	}
 	global.Log.Info("create the index successfully", zap.Any("index", resp))
 }
+
 func (a ArticleItem) CreateIndexByJson(index string) {
-	exist := a.ExistsIndexByJson(index)
+	exist := a.IndexExistByJson(index)
 	if exist {
 		global.Log.Info("the index already exists")
 		return
@@ -70,7 +72,7 @@ func (a ArticleItem) CreateIndexByJson(index string) {
 	global.Log.Info("create the index successfully", zap.Any("index", resp))
 }
 
-func (a ArticleItem) ExistsIndex() bool {
+func (a ArticleItem) IndexExist() bool {
 	resp, err := global.Es.Indices.Exists(a.Index()).Do(context.Background())
 	if err != nil {
 		global.Log.Error("detect the presence of the index", zap.Error(err))
@@ -78,12 +80,21 @@ func (a ArticleItem) ExistsIndex() bool {
 	return resp
 }
 
-func (a ArticleItem) ExistsIndexByJson(index string) bool {
+func (a ArticleItem) IndexExistByJson(index string) bool {
 	resp, err := global.Es.Indices.Exists(index).Do(context.Background())
 	if err != nil {
 		global.Log.Error("detect the presence of the index", zap.Error(err))
 	}
 	return resp
+}
+
+func (a ArticleItem) DocumentExist(title string) bool {
+	res := a.SearchDocumentTerm("title", title)
+	if len(res) == 0 {
+		return false
+	} else {
+		return true
+	}
 }
 
 func (a ArticleItem) DeleteIndex() {
@@ -196,7 +207,6 @@ func (a ArticleItem) SearchDocumentMultiMatch(fields []string, key string) (resu
 }
 
 func (a ArticleItem) SearchDocumentTerms(field string, key []string) (result []ArticleItem) {
-	// 搜索content中包含好评的文档
 	resp, err := global.Es.Search().
 		Index(a.Index()).
 		Query(&types.Query{
@@ -229,7 +239,6 @@ func (a ArticleItem) SearchDocumentTerms(field string, key []string) (result []A
 }
 
 func (a ArticleItem) SearchDocumentTerm(field string, key string) (result []ArticleItem) {
-	// 搜索content中包含好评的文档
 	resp, err := global.Es.Search().
 		Index(a.Index()).
 		Query(&types.Query{

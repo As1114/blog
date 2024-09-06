@@ -3,13 +3,13 @@ package user_ser
 import (
 	"blog/global"
 	"blog/models"
-	"blog/models/ctypes"
+	"blog/models/ctype"
 	"blog/utils"
 )
 
 const Avatar = "/upload/avatar/default_avatar.jpg"
 
-func (u UserService) CreateUser(nickname, account, password, ip string, role ctypes.Role) (err error) {
+func (u UserService) CreateUser(nickname, account, password, ip string, role ctype.Role) (err error) {
 	//判断用户是否存在
 	var user models.UserModel
 	err = global.DB.Where("nick_name=?", nickname).First(&user).Error

@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	ctype "blog/models/ctypes"
+	ctype "blog/models/ctype"
 	"blog/models/res"
 	"blog/service/redis_ser"
 	"blog/utils"

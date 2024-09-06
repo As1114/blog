@@ -1,4 +1,4 @@
-package ctypes
+package ctype
 
 import "encoding/json"
 

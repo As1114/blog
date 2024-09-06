@@ -2,7 +2,7 @@ package user
 
 import (
 	"blog/global"
-	"blog/models/ctypes"
+	"blog/models/ctype"
 	"blog/models/res"
 	"blog/service/user_ser"
 	"blog/utils"
@@ -12,9 +12,9 @@ import (
 )
 
 type UserCreateRequest struct {
-	Nickname string      `json:"nick_name" binding:"required" msg:"请输入昵称"`
-	Password string      `json:"password" binding:"required" msg:"请输入密码"`
-	Role     ctypes.Role `json:"role" binding:"required" msg:"请选择身份"`
+	Nickname string     `json:"nick_name" binding:"required" msg:"请输入昵称"`
+	Password string     `json:"password" binding:"required" msg:"请输入密码"`
+	Role     ctype.Role `json:"role" binding:"required" msg:"请选择身份"`
 }
 
 func (u User) UserCreate(c *gin.Context) {

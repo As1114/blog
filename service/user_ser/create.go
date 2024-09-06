@@ -12,7 +12,7 @@ const Avatar = "/upload/avatar/default_avatar.jpg"
 func (u UserService) CreateUser(nickname, account, password, ip string, role ctypes.Role) (err error) {
 	//判断用户是否存在
 	var user models.UserModel
-	err = global.DB.Take(&user, "nickname=?", nickname).Error
+	err = global.DB.Where("nick_name=?", nickname).First(&user).Error
 	if err == nil {
 		global.Log.Errorf("昵称%s已存在", nickname)
 		return err

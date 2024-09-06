@@ -2,6 +2,8 @@ package image_ser
 
 import (
 	"blog/global"
+	"blog/models"
+	"blog/models/ctype"
 	"blog/utils"
 	"fmt"
 	"io"
@@ -33,7 +35,8 @@ func (ImageService) ImageUploadService(file *multipart.FileHeader) (res FileUplo
 	basePath := global.Config.Upload.Path
 	filePath := path.Join(basePath, file.Filename)
 	res.FileName = filePath
-
+	fileType := ctype.Local
+	filePath = "/" + filePath
 	// 文件白名单判断
 	nameList := strings.Split(fileName, ".")
 	suffix := strings.ToLower(nameList[len(nameList)-1])
@@ -62,11 +65,18 @@ func (ImageService) ImageUploadService(file *multipart.FileHeader) (res FileUplo
 	}
 
 	imageHash := utils.Md5(byteData)
-	var bannerModel models.BannerModel
-	if err := global.DB.Where("hash = ?", imageHash).First(&bannerModel).Error; err == nil {
+	var image models.ImageModel
+	if err := global.DB.Where("hash = ?", imageHash).First(&image).Error; err == nil {
 		res.Msg = "图片已存在"
-		res.FileName = bannerModel.Path
+		res.FileName = image.Path
 		return
 	}
+
+	global.DB.Create(&models.ImageModel{
+		Hash:      imageHash,
+		Path:      filePath,
+		Name:      fileName,
+		ImageType: fileType,
+	})
 	return
 }

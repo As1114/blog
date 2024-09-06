@@ -2,7 +2,7 @@ package models
 
 import "blog/models/ctype"
 
-type BannerModel struct {
+type ImageModel struct {
 	MODEL
 	Path      string          `gorm:"comment:图片路径" json:"path"`
 	Hash      string          `gorm:"comment:图片的hash值" json:"hash"`

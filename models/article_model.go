@@ -14,7 +14,6 @@ type ArticleItem struct {
 	Article Article
 }
 type Article struct {
-	ID        string `json:"id"`
 	CreatedAt string `json:"created_at"` // 创建时间
 	UpdatedAt string `json:"updated_at"` // 更新时间
 

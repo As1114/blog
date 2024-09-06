@@ -1,8 +1,7 @@
-package email
+package utils
 
 import (
 	"blog/global"
-	"blog/utils/random"
 	"context"
 	"gopkg.in/gomail.v2"
 	"time"
@@ -33,7 +32,7 @@ func send(name, subject string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
 	defer cancel()
 	e := global.Config.Email
-	code := random.Code()
+	code := GenCode()
 	body := "你的验证码是" + code + "有效期1分钟"
 	global.Redis.Set(ctx, name, code, time.Minute)
 	return sendMail(

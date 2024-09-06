@@ -4,6 +4,7 @@ go 1.22.3
 
 require (
 	github.com/bwmarrin/snowflake v0.3.0
+	github.com/cc14514/go-geoip2 v0.0.0-20190105051856-0a1854480a11
 	github.com/cc14514/go-geoip2-db v0.0.0-20190106063142-7b6408a9812a
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1
 	github.com/elastic/go-elasticsearch/v8 v8.14.0
@@ -35,7 +36,6 @@ require (
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/bytedance/sonic v1.11.6 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
-	github.com/cc14514/go-geoip2 v0.0.0-20190105051856-0a1854480a11 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
 	github.com/cloudwego/iasm v0.2.0 // indirect

@@ -5,7 +5,7 @@ import (
 	"blog/models/ctypes"
 	"blog/models/res"
 	"blog/service/user_ser"
-	"blog/utils/snowflake"
+	"blog/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"strconv"
@@ -23,7 +23,7 @@ func (u User) UserCreate(c *gin.Context) {
 		res.FailWithError(err, &req, c)
 		return
 	}
-	account := snowflake.GenerateID()
+	account := utils.GenerateID()
 	err := user_ser.UserService{}.CreateUser(req.Nickname, strconv.FormatInt(account, 10), req.Password, c.ClientIP(), req.Role)
 	if err != nil {
 		global.Log.Error("create user error:", err.Error())

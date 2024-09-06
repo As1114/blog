@@ -5,8 +5,7 @@ import (
 	"blog/global"
 	"blog/models"
 	"blog/models/res"
-	"blog/utils/jwt"
-	"blog/utils/pwd"
+	"blog/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -32,13 +31,13 @@ func (u User) UserLogin(c *gin.Context) {
 			res.FailWithMessage("用户名或密码错误", c)
 			return
 		}
-		check := pwd.CheckPassword(user.Password, req.Password)
+		check := utils.CheckPassword(user.Password, req.Password)
 		if !check {
 			global.Log.Warn("用户名或密码错误")
 			res.FailWithMessage("用户名或密码错误", c)
 			return
 		}
-		token, err := jwt.GetToken(jwt.PayLoad{
+		token, err := utils.GetToken(utils.PayLoad{
 			Account: req.Account,
 			UserID:  user.ID,
 			Role:    int(user.Role)})

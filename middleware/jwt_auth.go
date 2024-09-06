@@ -4,7 +4,7 @@ import (
 	ctype "blog/models/ctypes"
 	"blog/models/res"
 	"blog/service/redis_ser"
-	"blog/utils/jwt"
+	"blog/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +16,7 @@ func JwtAuth() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		claims, err := jwt.ParseToken(token)
+		claims, err := utils.ParseToken(token)
 		if err != nil {
 			res.FailWithMessage("token错误", c)
 			c.Abort()
@@ -39,7 +39,7 @@ func JwtAdmin() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		claims, err := jwt.ParseToken(token)
+		claims, err := utils.ParseToken(token)
 		if err != nil {
 			res.FailWithMessage("token错误", c)
 			c.Abort()

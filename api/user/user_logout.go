@@ -4,13 +4,13 @@ import (
 	"blog/global"
 	"blog/models/res"
 	"blog/service/user_ser"
-	"blog/utils/jwt"
+	"blog/utils"
 	"github.com/gin-gonic/gin"
 )
 
 func (u User) UserLogout(c *gin.Context) {
 	_claims, _ := c.Get("claims")
-	claims := _claims.(*jwt.CustomClaims)
+	claims := _claims.(*utils.CustomClaims)
 	token := c.Request.Header.Get("token")
 	err := user_ser.UserService{}.Logout(claims, token)
 	if err != nil {

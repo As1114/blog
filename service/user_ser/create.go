@@ -5,7 +5,6 @@ import (
 	"blog/models"
 	"blog/models/ctypes"
 	"blog/utils"
-	"blog/utils/pwd"
 )
 
 const Avatar = "/upload/avatar/default_avatar.jpg"
@@ -19,7 +18,7 @@ func (u UserService) CreateUser(nickname, account, password, ip string, role cty
 		return err
 	}
 	//对密码进行加密
-	hashpwd := pwd.HashPassword(password)
+	hashpwd := utils.HashPassword(password)
 
 	addr := utils.GetAddrByIp(ip)
 

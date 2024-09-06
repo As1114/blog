@@ -13,6 +13,7 @@ type Config struct {
 	Es      Es      `mapstructure:"es"`
 	Jwt     Jwt     `mapstructure:"jwt"`
 	Captcha Captcha `mapstructure:"captcha"`
+	Upload  Upload  `mapstructure:"upload"`
 }
 
 func (m Mysql) Dsn() string {

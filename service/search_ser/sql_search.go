@@ -15,7 +15,7 @@ type Option struct {
 	Preload         []string // 预加载的字段列表
 }
 
-func ComList[T any](model T, option Option) (list []T, count int64, err error) {
+func SqlSearch[T any](model T, option Option) (list []T, count int64, err error) {
 	query := global.DB.Model(&model).Where(model)
 	if option.Debug {
 		query = query.Debug()

@@ -12,7 +12,7 @@ import (
 )
 
 type UserCreateRequest struct {
-	Nickname string      `json:"nickname" binding:"required" msg:"请输入昵称"`
+	Nickname string      `json:"nick_name" binding:"required" msg:"请输入昵称"`
 	Password string      `json:"password" binding:"required" msg:"请输入密码"`
 	Role     ctypes.Role `json:"role" binding:"required" msg:"请选择身份"`
 }

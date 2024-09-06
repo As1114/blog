@@ -14,7 +14,7 @@ type UserLoginRequest struct {
 	Account   string `json:"account"`
 	Password  string `json:"password"`
 	Captcha   string `json:"captcha"`
-	CaptchaId string `json:"captchaId"`
+	CaptchaId string `json:"captcha_id"`
 }
 
 func (u User) UserLogin(c *gin.Context) {

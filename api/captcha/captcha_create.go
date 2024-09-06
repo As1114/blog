@@ -11,8 +11,8 @@ import (
 var Store = base64Captcha.DefaultMemStore
 
 type CaptchaResponse struct {
-	CaptchaID string `json:"captchaId"`
-	PicPath   string `json:"picPath"`
+	CaptchaID string `json:"captcha_id"`
+	PicPath   string `json:"pic_path"`
 }
 
 // CreateCaptcha 验证码生成

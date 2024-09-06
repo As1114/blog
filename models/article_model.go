@@ -28,9 +28,9 @@ type Article struct {
 	DiggCount     int `json:"digg_count"`     // 点赞量
 	CollectsCount int `json:"collects_count"` // 收藏量
 
-	UserID     uint   `json:"user_id" `        // 用户id
-	UserName   string `json:"user_nick_name" ` //用户昵称
-	UserAvatar string `json:"user_avatar" `    // 用户头像
+	UserID     uint   `json:"user_id" `     // 用户id
+	UserName   string `json:"user_name" `   //用户昵称
+	UserAvatar string `json:"user_avatar" ` // 用户头像
 
 	Category string `json:"category"` // 文章分类
 

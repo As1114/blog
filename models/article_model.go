@@ -44,7 +44,7 @@ func (a ArticleItem) CreateIndex() {
 	exist := a.IndexExist()
 	if exist {
 		global.Log.Info("the index already exists")
-		return
+		a.DeleteIndex()
 	}
 	resp, err := global.Es.Indices.
 		Create(a.Index()).

@@ -37,7 +37,7 @@ email:
   user_tls: false
 jwt:
   secret: '2024724'
-  expires: 20
+  expires: 7
   issuer: "server"
 etcd:
   host: 127.0.0.1

@@ -31,5 +31,7 @@ func InitRouter() *gin.Engine {
 	// 系统配置api
 	routerGroupApp.CaptchaRouter()
 	routerGroupApp.UserRouter()
+	routerGroupApp.ImageRouter()
+	routerGroupApp.ArticleRouter()
 	return router
 }

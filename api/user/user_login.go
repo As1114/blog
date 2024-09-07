@@ -22,7 +22,6 @@ func (u User) UserLogin(c *gin.Context) {
 	if err != nil {
 		res.FailWithError(err, &req, c)
 	}
-
 	if req.Captcha != "" && req.CaptchaId != "" && captcha.Store.Verify(req.CaptchaId, req.Captcha, true) {
 		var user models.UserModel
 		err = global.DB.Take(&user, "account=?", req.Account).Error

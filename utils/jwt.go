@@ -25,7 +25,7 @@ func GetToken(payload PayLoad) (string, error) {
 	claim := CustomClaims{
 		payload,
 		jwt.StandardClaims{
-			ExpiresAt: jwt.At(time.Now().Add(time.Hour * time.Duration(global.Config.Jwt.Expires))), //过期时间
+			ExpiresAt: jwt.At(time.Now().Add(time.Hour * 24 * time.Duration(global.Config.Jwt.Expires))), //过期时间
 			Issuer:    global.Config.Jwt.Issuer,
 		},
 	}

@@ -248,13 +248,18 @@ func (a *Article) SearchDocumentTerm(field string, key string) (result []Article
 	return result
 }
 
-func (a *Article) UpdateDocument() {
-	resp, err := global.Es.Update(a.Index(), a.ID).Doc(a).Refresh(refresh.True).Do(context.Background())
+func (a *Article) UpdateDocument(id string, data map[string]any) (err error) {
+	resp, err := global.Es.UpdateByQuery(a.Index()).Query(&types.Query{
+		Term: map[string]types.TermQuery{
+			"id.keyword": {Value: id},
+		},
+	}).Script(data).Refresh(true).Do(context.Background())
 	if err != nil {
 		global.Log.Error("update document failed, err:%v\n", zap.Error(err))
-		return
+		return err
 	}
 	global.Log.Info("succeed to update the document", zap.Any("update", resp))
+	return nil
 }
 
 func (a *Article) DeleteMultipleDocuments(ids []string) error {

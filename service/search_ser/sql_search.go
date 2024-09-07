@@ -27,10 +27,10 @@ func SqlSearch[T any](model T, option Option) (list []T, count int64, err error)
 	}
 
 	// 设置分页
-	if option.Limit == 0 {
-		option.Limit = 10
+	if option.PageSize == 0 {
+		option.PageSize = 10
 	}
-	offset := (option.Page - 1) * option.Limit
+	offset := (option.Page - 1) * option.PageSize
 
 	// 高级查询
 	if option.Where != nil {
@@ -61,7 +61,7 @@ func SqlSearch[T any](model T, option Option) (list []T, count int64, err error)
 	countQuery.Model(&model).Count(&count)
 
 	// 获取列表
-	err = query.Limit(option.Limit).Offset(offset).Order(option.Sort).Find(&list).Error
+	err = query.Limit(option.PageSize).Offset(offset).Order(option.Sort).Find(&list).Error
 
 	return
 }

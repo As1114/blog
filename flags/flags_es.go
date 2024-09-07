@@ -17,7 +17,7 @@ type ESIndexResponse struct {
 }
 
 func EsIndexCreate(c *cli.Context) (err error) {
-	var es models.ArticleItem
+	var es models.Article
 	es.CreateIndex()
 	return nil
 }

@@ -7,6 +7,7 @@ import (
 	"blog/utils"
 	"github.com/gin-gonic/gin"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -63,7 +64,9 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		return
 	}
 	now := time.Now().Format("2006-01-02 15:04:05")
+	id := strconv.FormatInt(utils.GenerateID(), 10)
 	article := models.Article{
+		ID:         id,
 		Title:      req.Title,
 		Abstract:   req.Abstract,
 		Category:   req.Category,
@@ -76,14 +79,11 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		UserName:   user.Nickname,
 		UserAvatar: user.Avatar,
 	}
-	articleItem := models.ArticleItem{
-		Article: article,
-	}
-	exist := articleItem.DocumentExist(req.Title)
+	exist := article.DocumentExist(req.Title)
 	if exist {
 		res.FailWithMessage("文章已存在", c)
 		return
 	}
-	articleItem.CreateDocument()
+	article.CreateDocument()
 	res.OkWithMessage("文章发布成功", c)
 }

@@ -3,10 +3,10 @@ package models
 import "time"
 
 type PageInfo struct {
-	Page  int    `form:"page"`
-	Key   string `form:"key"`
-	Limit int    `form:"limit"`
-	Sort  string `form:"sort"`
+	Page     int    `form:"page"`
+	Key      string `form:"key"`
+	PageSize int    `form:"page_size"`
+	Sort     string `form:"sort"`
 }
 
 type MODEL struct {

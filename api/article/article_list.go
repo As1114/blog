@@ -8,7 +8,6 @@ import (
 
 type ArticleSearchRequest struct {
 	models.PageInfo
-	Category string `form:"category"`
 }
 
 func (a Article) ArticleList(c *gin.Context) {
@@ -18,8 +17,8 @@ func (a Article) ArticleList(c *gin.Context) {
 		res.FailWithError(err, &req, c)
 		return
 	}
-	var article models.ArticleItem
-	fields := []string{req.Category}
+	var article models.Article
+	fields := []string{"category"}
 	articles := article.SearchDocumentMultiMatch(fields, req.Key, req.PageInfo)
 	res.OkWithList(articles, int64(len(articles)), c)
 }

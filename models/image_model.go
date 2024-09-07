@@ -16,7 +16,7 @@ type ImageModel struct {
 	ImageType ctype.ImageType `gorm:"default:1;comment:图片的类型，1本地，2云端，默认是1" json:"image_type"`
 }
 
-func (b ImageModel) BeforeDelete(tx *gorm.DB) (err error) {
+func (b *ImageModel) BeforeDelete(tx *gorm.DB) (err error) {
 	if b.ImageType == ctype.Local {
 		err = os.Remove(b.Path[1:])
 		if err != nil {

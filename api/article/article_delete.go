@@ -7,7 +7,7 @@ import (
 )
 
 type IDListRequest struct {
-	IDList []string `json:"id_list"`
+	ID string `json:"id"`
 }
 
 func (a Article) ArticleDelete(c *gin.Context) {
@@ -17,8 +17,8 @@ func (a Article) ArticleDelete(c *gin.Context) {
 		res.FailWithError(err, &req, c)
 		return
 	}
-	var article models.ArticleItem
-	err = article.DeleteMultipleDocuments(req.IDList)
+	var article models.Article
+	err = article.DeleteDocument(req.ID)
 	if err != nil {
 		res.FailWithMessage("文章删除失败", c)
 		return

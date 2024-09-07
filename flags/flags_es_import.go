@@ -25,7 +25,7 @@ func EsImport(c *cli.Context) (err error) {
 		global.Log.Fatalf("%s err: %s", string(byteData), err.Error())
 		return err
 	}
-	var esClient models.ArticleItem
+	var esClient models.Article
 	esClient.CreateIndexByJson(response.Index)
 	var request bulk.Request
 	for _, data := range response.Data {

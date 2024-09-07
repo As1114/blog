@@ -6,14 +6,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
+	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/refresh"
 	"go.uber.org/zap"
 )
 
-type ArticleItem struct {
-	ID      string `json:"id"`
-	Article Article
-}
 type Article struct {
+	ID        string `json:"id"`
 	CreatedAt string `json:"created_at"` // 创建时间
 	UpdatedAt string `json:"updated_at"` // 更新时间
 
@@ -36,11 +34,11 @@ type Article struct {
 	CoverURL string `json:"banner_url"` // 封面
 }
 
-func (a ArticleItem) Index() string {
+func (a *Article) Index() string {
 	return "article_index"
 }
 
-func (a ArticleItem) CreateIndex() {
+func (a *Article) CreateIndex() {
 	exist := a.IndexExist()
 	if exist {
 		global.Log.Info("the index already exists")
@@ -56,11 +54,11 @@ func (a ArticleItem) CreateIndex() {
 	global.Log.Info("create the index successfully", zap.Any("index", resp))
 }
 
-func (a ArticleItem) CreateIndexByJson(index string) {
+func (a *Article) CreateIndexByJson(index string) {
 	exist := a.IndexExistByJson(index)
 	if exist {
 		global.Log.Info("the index already exists")
-		return
+		a.DeleteIndex()
 	}
 	resp, err := global.Es.Indices.
 		Create(index).
@@ -72,7 +70,7 @@ func (a ArticleItem) CreateIndexByJson(index string) {
 	global.Log.Info("create the index successfully", zap.Any("index", resp))
 }
 
-func (a ArticleItem) IndexExist() bool {
+func (a *Article) IndexExist() bool {
 	resp, err := global.Es.Indices.Exists(a.Index()).Do(context.Background())
 	if err != nil {
 		global.Log.Error("detect the presence of the index", zap.Error(err))
@@ -80,7 +78,7 @@ func (a ArticleItem) IndexExist() bool {
 	return resp
 }
 
-func (a ArticleItem) IndexExistByJson(index string) bool {
+func (a *Article) IndexExistByJson(index string) bool {
 	resp, err := global.Es.Indices.Exists(index).Do(context.Background())
 	if err != nil {
 		global.Log.Error("detect the presence of the index", zap.Error(err))
@@ -88,8 +86,8 @@ func (a ArticleItem) IndexExistByJson(index string) bool {
 	return resp
 }
 
-func (a ArticleItem) DocumentExist(title string) bool {
-	res := a.SearchDocumentTerm("title", title)
+func (a *Article) DocumentExist(title string) bool {
+	res := a.SearchDocumentTerm("title.keyword", title)
 	if len(res) == 0 {
 		return false
 	} else {
@@ -97,7 +95,7 @@ func (a ArticleItem) DocumentExist(title string) bool {
 	}
 }
 
-func (a ArticleItem) DeleteIndex() {
+func (a *Article) DeleteIndex() {
 	resp, err := global.Es.Indices.
 		Delete(a.Index()).
 		Do(context.Background())
@@ -108,8 +106,8 @@ func (a ArticleItem) DeleteIndex() {
 	global.Log.Info("succeed to delete the index", zap.Any("delete", resp))
 }
 
-func (a ArticleItem) CreateDocument() {
-	resp, err := global.Es.Index(a.Index()).Document(a).Do(context.Background())
+func (a *Article) CreateDocument() {
+	resp, err := global.Es.Index(a.Index()).Document(a).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("failed to create the document", zap.Error(err))
 		return
@@ -117,16 +115,21 @@ func (a ArticleItem) CreateDocument() {
 	global.Log.Info("succeed to create the document", zap.Any("doc", resp))
 }
 
-func (a ArticleItem) DeleteDocument() {
-	resp, err := global.Es.Delete(a.Index(), "TWtA_JAB9Xws_a1XiaYk").Do(context.Background())
+func (a *Article) DeleteDocument(id string) (err error) {
+	resp, err := global.Es.DeleteByQuery(a.Index()).Query(&types.Query{
+		Term: map[string]types.TermQuery{
+			"id.keyword": {Value: id},
+		},
+	}).Refresh(true).Do(context.Background())
 	if err != nil {
 		global.Log.Error("delete document failed, err:%v\n", zap.Error(err))
-		return
+		return err
 	}
 	global.Log.Info("succeed to delete the document", zap.Any("delete", resp))
+	return nil
 }
 
-func (a ArticleItem) GetDocumentById() (result ArticleItem) {
+func (a *Article) GetDocumentById() (result Article) {
 	resp, err := global.Es.Get(a.Index(), a.ID).
 		Do(context.Background())
 	if err != nil {
@@ -134,20 +137,16 @@ func (a ArticleItem) GetDocumentById() (result ArticleItem) {
 		return
 	}
 	var article Article
-	var articleitem ArticleItem
-	data := string(resp.Source_)
-	bytes := []byte(data)
-	err = json.Unmarshal(bytes, &article)
+	err = json.Unmarshal(resp.Source_, &article)
 	if err != nil {
 		global.Log.Error("unmarshal json failed", zap.Error(err))
 		return
 	}
-	articleitem.Article = article
-	articleitem.ID = resp.Id_
+
 	return result
 }
 
-func (a ArticleItem) SearchAllDocuments() (result []ArticleItem) {
+func (a *Article) SearchAllDocuments() (result []Article) {
 	resp, err := global.Es.Search().
 		Index(a.Index()).
 		Query(&types.Query{
@@ -157,25 +156,20 @@ func (a ArticleItem) SearchAllDocuments() (result []ArticleItem) {
 		global.Log.Error("search all documents failed", zap.Error(err))
 		return
 	}
-	var article Article
-	var articleitem ArticleItem
 	for _, hit := range resp.Hits.Hits {
-		data := string(hit.Source_)
-		bytes := []byte(data)
-		err := json.Unmarshal(bytes, &article)
+		var article Article
+		err := json.Unmarshal(hit.Source_, &article)
 		if err != nil {
 			global.Log.Error("unmarshal json failed", zap.Error(err))
-			return nil
+			continue
 		}
-		articleitem.Article = article
-		articleitem.ID = *hit.Id_
-		result = append(result, articleitem)
+		result = append(result, article)
 	}
 	return result
 }
 
-func (a ArticleItem) SearchDocumentMultiMatch(fields []string, key string, pageInfo PageInfo) (result []ArticleItem) {
-	form := (pageInfo.Page - 1) * pageInfo.Limit
+func (a *Article) SearchDocumentMultiMatch(fields []string, key string, pageInfo PageInfo) (result []Article) {
+	form := (pageInfo.Page - 1) * pageInfo.PageSize
 	resp, err := global.Es.Search().
 		Index(a.Index()).
 		Query(&types.Query{
@@ -183,30 +177,25 @@ func (a ArticleItem) SearchDocumentMultiMatch(fields []string, key string, pageI
 				Fields: fields,
 				Query:  key,
 			},
-		}).From(form).Size(pageInfo.Limit).
+		}).From(form).Size(pageInfo.PageSize).
 		Do(context.Background())
 	if err != nil {
 		global.Log.Error("search document failed", zap.Error(err))
 		return
 	}
-	var article Article
-	var articleitem ArticleItem
 	for _, hit := range resp.Hits.Hits {
-		data := string(hit.Source_)
-		bytes := []byte(data)
-		err := json.Unmarshal(bytes, &article)
+		var article Article
+		err := json.Unmarshal(hit.Source_, &article)
 		if err != nil {
 			global.Log.Error("unmarshal json failed", zap.Error(err))
-			return nil
+			continue
 		}
-		articleitem.Article = article
-		articleitem.ID = *hit.Id_
-		result = append(result, articleitem)
+		result = append(result, article)
 	}
 	return result
 }
 
-func (a ArticleItem) SearchDocumentTerms(field string, key []string) (result []ArticleItem) {
+func (a *Article) SearchDocumentTerms(field string, key []string) (result []Article) {
 	resp, err := global.Es.Search().
 		Index(a.Index()).
 		Query(&types.Query{
@@ -221,24 +210,20 @@ func (a ArticleItem) SearchDocumentTerms(field string, key []string) (result []A
 		fmt.Printf("search document failed, err:%v\n", err)
 		return
 	}
-	var article Article
-	var articleitem ArticleItem
 	for _, hit := range resp.Hits.Hits {
-		data := string(hit.Source_)
-		bytes := []byte(data)
-		err := json.Unmarshal(bytes, &article)
+		var article Article
+		err := json.Unmarshal(hit.Source_, &article)
 		if err != nil {
 			global.Log.Error("unmarshal json failed", zap.Error(err))
-			return nil
+			continue
 		}
-		articleitem.Article = article
-		articleitem.ID = *hit.Id_
-		result = append(result, articleitem)
+
+		result = append(result, article)
 	}
 	return result
 }
 
-func (a ArticleItem) SearchDocumentTerm(field string, key string) (result []ArticleItem) {
+func (a *Article) SearchDocumentTerm(field string, key string) (result []Article) {
 	resp, err := global.Es.Search().
 		Index(a.Index()).
 		Query(&types.Query{
@@ -248,28 +233,23 @@ func (a ArticleItem) SearchDocumentTerm(field string, key string) (result []Arti
 		}).
 		Do(context.Background())
 	if err != nil {
-		fmt.Printf("search document failed, err:%v\n", err)
+		global.Log.Error("search document failed, err:", zap.Error(err))
 		return
 	}
-	var article Article
-	var articleitem ArticleItem
 	for _, hit := range resp.Hits.Hits {
-		data := string(hit.Source_)
-		bytes := []byte(data)
-		err := json.Unmarshal(bytes, &article)
+		var article Article
+		err := json.Unmarshal(hit.Source_, &article)
 		if err != nil {
 			global.Log.Error("unmarshal json failed", zap.Error(err))
-			return
+			continue
 		}
-		articleitem.Article = article
-		articleitem.ID = *hit.Id_
-		result = append(result, articleitem)
+		result = append(result, article)
 	}
 	return result
 }
 
-func (a ArticleItem) UpdateDocument() {
-	resp, err := global.Es.Update(a.Index(), a.ID).Doc(a.Article).Do(context.Background())
+func (a *Article) UpdateDocument() {
+	resp, err := global.Es.Update(a.Index(), a.ID).Doc(a).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("update document failed, err:%v\n", zap.Error(err))
 		return
@@ -277,17 +257,7 @@ func (a ArticleItem) UpdateDocument() {
 	global.Log.Info("succeed to update the document", zap.Any("update", resp))
 }
 
-func (a ArticleItem) deleteDocument() {
-	resp, err := global.Es.Delete(a.Index(), a.ID).
-		Do(context.Background())
-	if err != nil {
-		global.Log.Error("delete document failed", zap.Error(err))
-		return
-	}
-	global.Log.Info("succeed to delete the document", zap.Any("delete", resp))
-}
-
-func (a ArticleItem) DeleteMultipleDocuments(ids []string) error {
+func (a *Article) DeleteMultipleDocuments(ids []string) error {
 	bulkRequest := global.Es.Bulk()
 
 	for _, id := range ids {
@@ -299,7 +269,7 @@ func (a ArticleItem) DeleteMultipleDocuments(ids []string) error {
 		}
 	}
 
-	_, err := bulkRequest.Do(context.Background())
+	_, err := bulkRequest.Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("bulk delete documents failed", zap.Error(err))
 		return err

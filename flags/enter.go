@@ -85,8 +85,8 @@ func Newflags() {
 			},
 		},
 		{
-			Name:    "es-index-create",
-			Aliases: []string{"e-i-c"},
+			Name:    "es",
+			Aliases: []string{"es"},
 			Usage:   "create a elasticsearch index",
 			Action:  EsIndexCreate,
 		},

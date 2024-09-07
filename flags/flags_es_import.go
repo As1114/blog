@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/core/bulk"
 	"github.com/urfave/cli/v2"
+	"go.uber.org/zap"
 	"os"
 )
 
@@ -14,7 +15,7 @@ func EsImport(c *cli.Context) (err error) {
 	path := c.String("path")
 	byteData, err := os.ReadFile(path)
 	if err != nil {
-		global.Log.Error("EsImport ReadFile err:", err)
+		global.Log.Error("EsImport ReadFile err:", zap.Error(err))
 		return err
 	}
 
@@ -38,7 +39,7 @@ func EsImport(c *cli.Context) (err error) {
 	}
 	_, err = global.Es.Bulk().Index(response.Index).Request(&request).Do(context.Background())
 	if err != nil {
-		global.Log.Error("EsImport Bulk err:", err)
+		global.Log.Error("EsImport Bulk err:", zap.Error(err))
 		return err
 	}
 	global.Log.Infof("Es数据添加成功,共添加 %d 条", len(response.Data))

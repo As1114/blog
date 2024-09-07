@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/urfave/cli/v2"
+	"go.uber.org/zap"
 	"os/exec"
 	"time"
 )
@@ -27,7 +28,7 @@ func MysqlExport(c *cli.Context) (err error) {
 	err = cmd.Run()
 
 	if err != nil {
-		global.Log.Errorln(err.Error(), stderr.String())
+		global.Log.Error("mysql export failed! err:", zap.Error(err))
 		return err
 	}
 	global.Log.Infof("sql文件 %s 导出成功", sqlPath)

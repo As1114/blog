@@ -2,6 +2,7 @@ package utils
 
 import (
 	"blog/global"
+	"go.uber.org/zap"
 	"time"
 
 	sf "github.com/bwmarrin/snowflake"
@@ -13,7 +14,7 @@ func Init(startTime string, machineID int64) {
 	var st time.Time
 	st, err := time.Parse("2006-01-02", startTime)
 	if err != nil {
-		global.Log.Error("parse start time error:", err.Error())
+		global.Log.Error("parse start time error:", zap.Error(err))
 		return
 	}
 	sf.Epoch = st.UnixNano() / 1000000

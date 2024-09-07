@@ -6,6 +6,7 @@ import (
 	"blog/models/ctype"
 	"blog/utils"
 	"fmt"
+	"go.uber.org/zap"
 	"io"
 	"mime/multipart"
 	"path"
@@ -54,13 +55,13 @@ func (ImageService) ImageUploadService(file *multipart.FileHeader) (res FileUplo
 
 	fileObj, err := file.Open()
 	if err != nil {
-		global.Log.Error(err)
+		global.Log.Error("open fileObj err:", zap.Error(err))
 		return
 	}
 
 	byteData, err := io.ReadAll(fileObj)
 	if err != nil {
-		global.Log.Error(err)
+		global.Log.Error("read file err:", zap.Error(err))
 		return
 	}
 

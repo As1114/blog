@@ -9,6 +9,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	enTranslations "github.com/go-playground/validator/v10/translations/en"
 	zhTranslations "github.com/go-playground/validator/v10/translations/zh"
+	"go.uber.org/zap"
 )
 
 // 定义一个全局翻译器T
@@ -32,7 +33,7 @@ func InitTrans(locale string) (err error) {
 		// 也可以使用 uni.FindTranslator(...) 传入多个locale进行查找
 		trans, ok = uni.GetTranslator(locale)
 		if !ok {
-			global.Log.Error("fail to get translator")
+			global.Log.Error("fail to get translator", zap.Error(err))
 		}
 
 		// 注册翻译器

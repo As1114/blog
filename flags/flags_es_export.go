@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"github.com/urfave/cli/v2"
+	"go.uber.org/zap"
 	"os"
 	"time"
 )
@@ -17,7 +18,7 @@ func EsExport(c *cli.Context) (err error) {
 		MatchAll: &types.MatchAllQuery{},
 	}).Do(context.Background())
 	if err != nil {
-		global.Log.Error("EsExport err:", err.Error())
+		global.Log.Error("EsExport err:", zap.Error(err))
 		return err
 	}
 

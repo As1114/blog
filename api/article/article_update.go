@@ -4,7 +4,6 @@ import (
 	"blog/global"
 	"blog/models"
 	"blog/models/res"
-	"github.com/fatih/structs"
 	"github.com/gin-gonic/gin"
 	"time"
 )
@@ -34,6 +33,7 @@ func (a Article) ArticleUpdate(c *gin.Context) {
 		}
 	}
 	article := models.Article{
+		ID:        req.ID,
 		UpdatedAt: time.Now().Format("2006-01-02 15:04:05"),
 		Title:     req.Title,
 		Abstract:  req.Abstract,
@@ -42,32 +42,32 @@ func (a Article) ArticleUpdate(c *gin.Context) {
 		CoverID:   req.CoverID,
 		CoverURL:  coverUrl,
 	}
-	maps := structs.Map(&article)
-	var DataMap = map[string]any{}
+	//maps := structs.Map(&article)
+	//var DataMap = map[string]any{}
+	//
+	//for key, v := range maps {
+	//	switch val := v.(type) {
+	//	case string:
+	//		if val == "" {
+	//			continue
+	//		}
+	//	case uint:
+	//		if val == 0 {
+	//			continue
+	//		}
+	//	case int:
+	//		if val == 0 {
+	//			continue
+	//		}
+	//	case []string:
+	//		if len(val) == 0 {
+	//			continue
+	//		}
+	//	}
+	//	DataMap[key] = v
+	//}
 
-	for key, v := range maps {
-		switch val := v.(type) {
-		case string:
-			if val == "" {
-				continue
-			}
-		case uint:
-			if val == 0 {
-				continue
-			}
-		case int:
-			if val == 0 {
-				continue
-			}
-		case []string:
-			if len(val) == 0 {
-				continue
-			}
-		}
-		DataMap[key] = v
-	}
-
-	err = article.UpdateDocument(req.ID, DataMap)
+	err = article.UpdateDocument()
 	if err != nil {
 		res.FailWithMessage("文章更新失败", c)
 		return

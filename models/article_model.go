@@ -30,8 +30,8 @@ type Article struct {
 
 	Category string `json:"category"` // 文章分类
 
-	CoverID  uint   `json:"banner_id"`  // 封面id
-	CoverURL string `json:"banner_url"` // 封面
+	CoverID  uint   `json:"cover_id"`  // 封面id
+	CoverURL string `json:"cover_url"` // 封面
 }
 
 func (a *Article) Index() string {
@@ -107,7 +107,7 @@ func (a *Article) DeleteIndex() {
 }
 
 func (a *Article) CreateDocument() {
-	resp, err := global.Es.Index(a.Index()).Document(a).Refresh(refresh.True).Do(context.Background())
+	resp, err := global.Es.Index(a.Index()).Id(a.ID).Document(a).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("failed to create the document", zap.Error(err))
 		return
@@ -116,11 +116,7 @@ func (a *Article) CreateDocument() {
 }
 
 func (a *Article) DeleteDocument(id string) (err error) {
-	resp, err := global.Es.DeleteByQuery(a.Index()).Query(&types.Query{
-		Term: map[string]types.TermQuery{
-			"id.keyword": {Value: id},
-		},
-	}).Refresh(true).Do(context.Background())
+	resp, err := global.Es.Delete(a.Index(), id).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("delete document failed, err:%v\n", zap.Error(err))
 		return err
@@ -248,14 +244,10 @@ func (a *Article) SearchDocumentTerm(field string, key string) (result []Article
 	return result
 }
 
-func (a *Article) UpdateDocument(id string, data map[string]any) (err error) {
-	resp, err := global.Es.UpdateByQuery(a.Index()).Query(&types.Query{
-		Term: map[string]types.TermQuery{
-			"id.keyword": {Value: id},
-		},
-	}).Script(data).Refresh(true).Do(context.Background())
+func (a *Article) UpdateDocument() (err error) {
+	resp, err := global.Es.Update(a.Index(), a.ID).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
-		global.Log.Error("update document failed, err:%v\n", zap.Error(err))
+		global.Log.Error("update document failed, err:", zap.Error(err))
 		return err
 	}
 	global.Log.Info("succeed to update the document", zap.Any("update", resp))

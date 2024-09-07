@@ -12,4 +12,5 @@ func (router RouterGroup) UserRouter() {
 	userRouter.POST("create", userApi.UserCreate)
 	userRouter.POST("login", userApi.UserLogin)
 	userRouter.POST("logout", middleware.JwtAuth(), userApi.UserLogout)
+	userRouter.POST("update", middleware.JwtAuth(), userApi.UserInfoUpdate)
 }

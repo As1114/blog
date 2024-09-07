@@ -11,4 +11,5 @@ func (router RouterGroup) ArticleRouter() {
 	articleRouter.POST("create", middleware.JwtAdmin(), articleApi.ArticleCreate)
 	articleRouter.GET("list", articleApi.ArticleList)
 	articleRouter.DELETE("delete", middleware.JwtAdmin(), articleApi.ArticleDelete)
+	articleRouter.PUT("update", middleware.JwtAdmin(), articleApi.ArticleUpdate)
 }

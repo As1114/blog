@@ -66,12 +66,14 @@ func (ImageService) ImageUploadService(file *multipart.FileHeader) (res FileUplo
 
 	imageHash := utils.Md5(byteData)
 	var image models.ImageModel
-	if err := global.DB.Where("hash = ?", imageHash).First(&image).Error; err == nil {
+	err = global.DB.Where("hash = ?", imageHash).First(&image).Error
+	if err == nil {
 		res.Msg = "图片已存在"
 		res.FileName = image.Path
 		return
 	}
-
+	res.Msg = "图片上传成功"
+	res.IsSuccess = true
 	global.DB.Create(&models.ImageModel{
 		Hash:      imageHash,
 		Path:      filePath,

@@ -47,6 +47,6 @@ captcha:
   img_width: 240
   img_height: 80
 upload:
-  size: 10
+  size: 20
   path: upload/image
 

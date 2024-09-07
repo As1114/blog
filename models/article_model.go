@@ -286,3 +286,24 @@ func (a ArticleItem) deleteDocument() {
 	}
 	global.Log.Info("succeed to delete the document", zap.Any("delete", resp))
 }
+
+func (a ArticleItem) DeleteMultipleDocuments(ids []string) error {
+	bulkRequest := global.Es.Bulk()
+
+	for _, id := range ids {
+		op := types.DeleteOperation{Id_: &id}
+		err := bulkRequest.DeleteOp(op)
+		if err != nil {
+			global.Log.Error("delete document failed", zap.Error(err))
+			return err
+		}
+	}
+
+	_, err := bulkRequest.Do(context.Background())
+	if err != nil {
+		global.Log.Error("bulk delete documents failed", zap.Error(err))
+		return err
+	}
+	global.Log.Info("succeed to bulk delete documents")
+	return nil
+}

@@ -4,11 +4,13 @@ go 1.22.3
 
 require (
 	github.com/JohannesKaufmann/html-to-markdown v1.6.0
+	github.com/PuerkitoBio/goquery v1.9.2
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/cc14514/go-geoip2 v0.0.0-20190105051856-0a1854480a11
 	github.com/cc14514/go-geoip2-db v0.0.0-20190106063142-7b6408a9812a
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1
 	github.com/elastic/go-elasticsearch/v8 v8.14.0
+	github.com/fatih/structs v1.1.0
 	github.com/fsnotify/fsnotify v1.7.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-playground/locales v0.14.1
@@ -34,7 +36,6 @@ require (
 require (
 	github.com/BurntSushi/toml v1.4.0 // indirect
 	github.com/KyleBanks/depth v1.2.1 // indirect
-	github.com/PuerkitoBio/goquery v1.9.2 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/andybalholm/cascadia v1.3.2 // indirect

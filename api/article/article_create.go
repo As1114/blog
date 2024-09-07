@@ -5,6 +5,7 @@ import (
 	"blog/models"
 	"blog/models/res"
 	"blog/utils"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"time"
@@ -57,7 +58,8 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		return
 	}
 	var user models.UserModel
-	err = global.DB.Where("user_id=?", userId).First(&user).Error
+	fmt.Println(userId)
+	err = global.DB.Where("id = ?", userId).First(&user).Error
 	if err != nil {
 		res.FailWithMessage("用户不存在", c)
 		return

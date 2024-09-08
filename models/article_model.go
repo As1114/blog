@@ -245,7 +245,7 @@ func (a *Article) SearchDocumentTerm(field string, key string) (result []Article
 }
 
 func (a *Article) UpdateDocument() (err error) {
-	resp, err := global.Es.Update(a.Index(), a.ID).Refresh(refresh.True).Do(context.Background())
+	resp, err := global.Es.Update(a.Index(), a.ID).Doc(a).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("update document failed, err:", zap.Error(err))
 		return err

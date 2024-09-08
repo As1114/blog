@@ -79,7 +79,7 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		UserName:   user.Nickname,
 		UserAvatar: user.Avatar,
 	}
-	exist := models.DocIsExist(req.Title)
+	exist := models.DocIsExistByTitle(req.Title)
 	if exist {
 		res.FailWithMessage("文章已存在", c)
 		return

@@ -85,7 +85,12 @@ func (a Article) IndexIsExistByJson(index string) bool {
 	return resp
 }
 
-func DocIsExist(title string) bool {
+func DocIsExistById(id string) bool {
+	res, _ := global.Es.Exists(Article{}.Index(), id).Do(context.Background())
+	return res
+}
+
+func DocIsExistByTitle(title string) bool {
 	res := search_ser.SearchDocumentTerm("title.keyword", title)
 	if len(res) == 0 {
 		return false

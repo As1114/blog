@@ -67,7 +67,7 @@ func (a Article) ArticleUpdate(c *gin.Context) {
 	//	DataMap[key] = v
 	//}
 
-	err = article.UpdateDocument()
+	err = article.UpdateDoc()
 	if err != nil {
 		res.FailWithMessage("文章更新失败", c)
 		return

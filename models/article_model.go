@@ -2,9 +2,8 @@ package models
 
 import (
 	"blog/global"
+	"blog/service/es_ser"
 	"context"
-	"encoding/json"
-	"fmt"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/refresh"
 	"go.uber.org/zap"
@@ -87,7 +86,7 @@ func (a *Article) IndexExistByJson(index string) bool {
 }
 
 func (a *Article) DocumentExist(title string) bool {
-	res := a.SearchDocumentTerm("title.keyword", title)
+	res := es_ser.SearchDocumentTerm("title.keyword", title)
 	if len(res) == 0 {
 		return false
 	} else {
@@ -106,16 +105,17 @@ func (a *Article) DeleteIndex() {
 	global.Log.Info("succeed to delete the index", zap.Any("delete", resp))
 }
 
-func (a *Article) CreateDocument() {
+func (a *Article) CreateDoc() (err error) {
 	resp, err := global.Es.Index(a.Index()).Id(a.ID).Document(a).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("failed to create the document", zap.Error(err))
-		return
+		return err
 	}
 	global.Log.Info("succeed to create the document", zap.Any("doc", resp))
+	return nil
 }
 
-func (a *Article) DeleteDocument(id string) (err error) {
+func (a *Article) DeleteDoc(id string) (err error) {
 	resp, err := global.Es.Delete(a.Index(), id).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("delete document failed, err:%v\n", zap.Error(err))
@@ -125,126 +125,7 @@ func (a *Article) DeleteDocument(id string) (err error) {
 	return nil
 }
 
-func (a *Article) GetDocumentById() (result Article) {
-	resp, err := global.Es.Get(a.Index(), a.ID).
-		Do(context.Background())
-	if err != nil {
-		global.Log.Error("get document by id failed", zap.Error(err))
-		return
-	}
-	var article Article
-	err = json.Unmarshal(resp.Source_, &article)
-	if err != nil {
-		global.Log.Error("unmarshal json failed", zap.Error(err))
-		return
-	}
-
-	return result
-}
-
-func (a *Article) SearchAllDocuments() (result []Article) {
-	resp, err := global.Es.Search().
-		Index(a.Index()).
-		Query(&types.Query{
-			MatchAll: &types.MatchAllQuery{},
-		}).Do(context.Background())
-	if err != nil {
-		global.Log.Error("search all documents failed", zap.Error(err))
-		return
-	}
-	for _, hit := range resp.Hits.Hits {
-		var article Article
-		err := json.Unmarshal(hit.Source_, &article)
-		if err != nil {
-			global.Log.Error("unmarshal json failed", zap.Error(err))
-			continue
-		}
-		result = append(result, article)
-	}
-	return result
-}
-
-func (a *Article) SearchDocumentMultiMatch(fields []string, key string, pageInfo PageInfo) (result []Article) {
-	form := (pageInfo.Page - 1) * pageInfo.PageSize
-	resp, err := global.Es.Search().
-		Index(a.Index()).
-		Query(&types.Query{
-			MultiMatch: &types.MultiMatchQuery{
-				Fields: fields,
-				Query:  key,
-			},
-		}).From(form).Size(pageInfo.PageSize).
-		Do(context.Background())
-	if err != nil {
-		global.Log.Error("search document failed", zap.Error(err))
-		return
-	}
-	for _, hit := range resp.Hits.Hits {
-		var article Article
-		err := json.Unmarshal(hit.Source_, &article)
-		if err != nil {
-			global.Log.Error("unmarshal json failed", zap.Error(err))
-			continue
-		}
-		result = append(result, article)
-	}
-	return result
-}
-
-func (a *Article) SearchDocumentTerms(field string, key []string) (result []Article) {
-	resp, err := global.Es.Search().
-		Index(a.Index()).
-		Query(&types.Query{
-			Terms: &types.TermsQuery{
-				TermsQuery: map[string]types.TermsQueryField{
-					field: key,
-				},
-			},
-		}).
-		Do(context.Background())
-	if err != nil {
-		fmt.Printf("search document failed, err:%v\n", err)
-		return
-	}
-	for _, hit := range resp.Hits.Hits {
-		var article Article
-		err := json.Unmarshal(hit.Source_, &article)
-		if err != nil {
-			global.Log.Error("unmarshal json failed", zap.Error(err))
-			continue
-		}
-
-		result = append(result, article)
-	}
-	return result
-}
-
-func SearchDocumentTerm(field string, key string) (result []Article) {
-	resp, err := global.Es.Search().
-		Index(article.Index()).
-		Query(&types.Query{
-			Term: map[string]types.TermQuery{
-				field: {Value: key},
-			},
-		}).
-		Do(context.Background())
-	if err != nil {
-		global.Log.Error("search document failed, err:", zap.Error(err))
-		return
-	}
-	for _, hit := range resp.Hits.Hits {
-		var article Article
-		err := json.Unmarshal(hit.Source_, &article)
-		if err != nil {
-			global.Log.Error("unmarshal json failed", zap.Error(err))
-			continue
-		}
-		result = append(result, article)
-	}
-	return result
-}
-
-func (a *Article) UpdateDocument() (err error) {
+func (a *Article) UpdateDoc() (err error) {
 	resp, err := global.Es.Update(a.Index(), a.ID).Doc(a).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("update document failed, err:", zap.Error(err))
@@ -254,7 +135,7 @@ func (a *Article) UpdateDocument() (err error) {
 	return nil
 }
 
-func (a *Article) DeleteMultipleDocuments(ids []string) error {
+func (a *Article) DeleteMulDocs(ids []string) error {
 	bulkRequest := global.Es.Bulk()
 
 	for _, id := range ids {

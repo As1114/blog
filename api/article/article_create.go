@@ -84,6 +84,10 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		res.FailWithMessage("文章已存在", c)
 		return
 	}
-	article.CreateDocument()
+	err = article.CreateDoc()
+	if err != nil {
+		res.FailWithMessage("文章发布失败", c)
+		return
+	}
 	res.OkWithMessage("文章发布成功", c)
 }

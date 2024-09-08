@@ -18,7 +18,7 @@ func (a Article) ArticleDelete(c *gin.Context) {
 		return
 	}
 	var article models.Article
-	err = article.DeleteDocument(req.ID)
+	err = article.DeleteDoc(req.ID)
 	if err != nil {
 		res.FailWithMessage("文章删除失败", c)
 		return

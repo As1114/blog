@@ -1,4 +1,4 @@
-package es_ser
+package search_ser
 
 import (
 	"blog/global"

@@ -2,7 +2,7 @@ package models
 
 import (
 	"blog/global"
-	"blog/service/es_ser"
+	"blog/service/search_ser"
 	"context"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/refresh"
@@ -86,7 +86,7 @@ func (a *Article) IndexExistByJson(index string) bool {
 }
 
 func (a *Article) DocumentExist(title string) bool {
-	res := es_ser.SearchDocumentTerm("title.keyword", title)
+	res := search_ser.SearchDocumentTerm("title.keyword", title)
 	if len(res) == 0 {
 		return false
 	} else {

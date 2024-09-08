@@ -219,9 +219,9 @@ func (a *Article) SearchDocumentTerms(field string, key []string) (result []Arti
 	return result
 }
 
-func (a *Article) SearchDocumentTerm(field string, key string) (result []Article) {
+func SearchDocumentTerm(field string, key string) (result []Article) {
 	resp, err := global.Es.Search().
-		Index(a.Index()).
+		Index(article.Index()).
 		Query(&types.Query{
 			Term: map[string]types.TermQuery{
 				field: {Value: key},

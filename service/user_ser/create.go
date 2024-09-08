@@ -9,7 +9,7 @@ import (
 
 const Avatar = "/upload/avatar/default_avatar.jpg"
 
-func (u UserService) CreateUser(nickname, account, password, ip string, role ctype.Role) (err error) {
+func CreateUser(nickname, account, password, ip string, role ctype.Role) (err error) {
 	//判断用户是否存在
 	var user models.UserModel
 	err = global.DB.Where("nick_name=?", nickname).First(&user).Error

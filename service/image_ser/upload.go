@@ -31,7 +31,7 @@ type FileUploadResponse struct {
 }
 
 // ImageUploadService 文件上传
-func (ImageService) ImageUploadService(file *multipart.FileHeader) (res FileUploadResponse) {
+func ImageUploadService(file *multipart.FileHeader) (res FileUploadResponse) {
 	fileName := file.Filename
 	basePath := global.Config.Upload.Path
 	filePath := path.Join(basePath, file.Filename)

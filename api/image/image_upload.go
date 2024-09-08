@@ -34,7 +34,7 @@ func (i Image) ImageUpload(c *gin.Context) {
 	var resList []image_ser.FileUploadResponse
 
 	for _, file := range fileList {
-		serviceRes := image_ser.ImageService{}.ImageUploadService(file)
+		serviceRes := image_ser.ImageUploadService(file)
 		if !serviceRes.IsSuccess {
 			resList = append(resList, serviceRes)
 			continue

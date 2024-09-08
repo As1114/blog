@@ -24,7 +24,7 @@ func (u User) UserCreate(c *gin.Context) {
 		return
 	}
 	account := utils.GenerateID()
-	err := user_ser.UserService{}.CreateUser(req.Nickname, strconv.FormatInt(account, 10), req.Password, c.ClientIP(), req.Role)
+	err := user_ser.CreateUser(req.Nickname, strconv.FormatInt(account, 10), req.Password, c.ClientIP(), req.Role)
 	if err != nil {
 		global.Log.Error("create user error:", err.Error())
 		res.FailWithError(err, &req, c)

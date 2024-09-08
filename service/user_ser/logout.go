@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func (UserService) Logout(claims *utils.CustomClaims, token string) error {
+func Logout(claims *utils.CustomClaims, token string) error {
 	exp := claims.ExpiresAt
 	now := time.Now()
 	diff := exp.Time.Sub(now)

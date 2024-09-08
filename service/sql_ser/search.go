@@ -1,4 +1,4 @@
-package search_ser
+package sql_ser
 
 import (
 	"blog/global"

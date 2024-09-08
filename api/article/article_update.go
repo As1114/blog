@@ -42,31 +42,6 @@ func (a Article) ArticleUpdate(c *gin.Context) {
 		CoverID:   req.CoverID,
 		CoverURL:  coverUrl,
 	}
-	//maps := structs.Map(&article)
-	//var DataMap = map[string]any{}
-	//
-	//for key, v := range maps {
-	//	switch val := v.(type) {
-	//	case string:
-	//		if val == "" {
-	//			continue
-	//		}
-	//	case uint:
-	//		if val == 0 {
-	//			continue
-	//		}
-	//	case int:
-	//		if val == 0 {
-	//			continue
-	//		}
-	//	case []string:
-	//		if len(val) == 0 {
-	//			continue
-	//		}
-	//	}
-	//	DataMap[key] = v
-	//}
-
 	err = article.UpdateDoc()
 	if err != nil {
 		res.FailWithMessage("文章更新失败", c)

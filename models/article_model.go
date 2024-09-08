@@ -33,12 +33,12 @@ type Article struct {
 	CoverURL string `json:"cover_url"` // 封面
 }
 
-func (a *Article) Index() string {
+func (a Article) Index() string {
 	return "article_index"
 }
 
-func (a *Article) CreateIndex() {
-	exist := a.IndexExist()
+func (a Article) CreateIndex() {
+	exist := a.IndexIsExist()
 	if exist {
 		global.Log.Info("the index already exists")
 		a.DeleteIndex()
@@ -53,8 +53,8 @@ func (a *Article) CreateIndex() {
 	global.Log.Info("create the index successfully", zap.Any("index", resp))
 }
 
-func (a *Article) CreateIndexByJson(index string) {
-	exist := a.IndexExistByJson(index)
+func (a Article) CreateIndexByJson(index string) {
+	exist := a.IndexIsExistByJson(index)
 	if exist {
 		global.Log.Info("the index already exists")
 		a.DeleteIndex()
@@ -69,7 +69,7 @@ func (a *Article) CreateIndexByJson(index string) {
 	global.Log.Info("create the index successfully", zap.Any("index", resp))
 }
 
-func (a *Article) IndexExist() bool {
+func (a Article) IndexIsExist() bool {
 	resp, err := global.Es.Indices.Exists(a.Index()).Do(context.Background())
 	if err != nil {
 		global.Log.Error("detect the presence of the index", zap.Error(err))
@@ -77,7 +77,7 @@ func (a *Article) IndexExist() bool {
 	return resp
 }
 
-func (a *Article) IndexExistByJson(index string) bool {
+func (a Article) IndexIsExistByJson(index string) bool {
 	resp, err := global.Es.Indices.Exists(index).Do(context.Background())
 	if err != nil {
 		global.Log.Error("detect the presence of the index", zap.Error(err))
@@ -85,7 +85,7 @@ func (a *Article) IndexExistByJson(index string) bool {
 	return resp
 }
 
-func (a *Article) DocumentExist(title string) bool {
+func DocIsExist(title string) bool {
 	res := search_ser.SearchDocumentTerm("title.keyword", title)
 	if len(res) == 0 {
 		return false
@@ -94,7 +94,7 @@ func (a *Article) DocumentExist(title string) bool {
 	}
 }
 
-func (a *Article) DeleteIndex() {
+func (a Article) DeleteIndex() {
 	resp, err := global.Es.Indices.
 		Delete(a.Index()).
 		Do(context.Background())
@@ -105,7 +105,7 @@ func (a *Article) DeleteIndex() {
 	global.Log.Info("succeed to delete the index", zap.Any("delete", resp))
 }
 
-func (a *Article) CreateDoc() (err error) {
+func (a Article) CreateDoc() (err error) {
 	resp, err := global.Es.Index(a.Index()).Id(a.ID).Document(a).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("failed to create the document", zap.Error(err))
@@ -115,8 +115,8 @@ func (a *Article) CreateDoc() (err error) {
 	return nil
 }
 
-func (a *Article) DeleteDoc(id string) (err error) {
-	resp, err := global.Es.Delete(a.Index(), id).Refresh(refresh.True).Do(context.Background())
+func DeleteDoc(id string) (err error) {
+	resp, err := global.Es.Delete(Article{}.Index(), id).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("delete document failed, err:%v\n", zap.Error(err))
 		return err
@@ -125,7 +125,7 @@ func (a *Article) DeleteDoc(id string) (err error) {
 	return nil
 }
 
-func (a *Article) UpdateDoc() (err error) {
+func (a Article) UpdateDoc() (err error) {
 	resp, err := global.Es.Update(a.Index(), a.ID).Doc(a).Refresh(refresh.True).Do(context.Background())
 	if err != nil {
 		global.Log.Error("update document failed, err:", zap.Error(err))
@@ -135,7 +135,7 @@ func (a *Article) UpdateDoc() (err error) {
 	return nil
 }
 
-func (a *Article) DeleteMulDocs(ids []string) error {
+func DeleteMulDocs(ids []string) error {
 	bulkRequest := global.Es.Bulk()
 
 	for _, id := range ids {

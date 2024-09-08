@@ -21,4 +21,5 @@ func (comment *Comment) CommentCreate(c *gin.Context) {
 	}
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*utils.CustomClaims)
+
 }

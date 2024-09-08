@@ -10,11 +10,9 @@ import (
 	"go.uber.org/zap"
 )
 
-var article models.Article
-
 func SearchDocumentTerm(field string, key string) (result []models.Article) {
 	resp, err := global.Es.Search().
-		Index(article.Index()).
+		Index(models.Article{}.Index()).
 		Query(&types.Query{
 			Term: map[string]types.TermQuery{
 				field: {Value: key},
@@ -39,7 +37,7 @@ func SearchDocumentTerm(field string, key string) (result []models.Article) {
 
 func SearchDocumentTerms(field string, key []string) (result []models.Article) {
 	resp, err := global.Es.Search().
-		Index(article.Index()).
+		Index(models.Article{}.Index()).
 		Query(&types.Query{
 			Terms: &types.TermsQuery{
 				TermsQuery: map[string]types.TermsQueryField{
@@ -68,7 +66,7 @@ func SearchDocumentTerms(field string, key []string) (result []models.Article) {
 func SearchDocumentMultiMatch(fields []string, key string, pageInfo models.PageInfo) (result []models.Article) {
 	form := (pageInfo.Page - 1) * pageInfo.PageSize
 	resp, err := global.Es.Search().
-		Index(article.Index()).
+		Index(models.Article{}.Index()).
 		Query(&types.Query{
 			MultiMatch: &types.MultiMatchQuery{
 				Fields: fields,
@@ -93,7 +91,7 @@ func SearchDocumentMultiMatch(fields []string, key string, pageInfo models.PageI
 }
 
 func GetDocumentById(id string) (result models.Article) {
-	resp, err := global.Es.Get(article.Index(), id).
+	resp, err := global.Es.Get(models.Article{}.Index(), id).
 		Do(context.Background())
 	if err != nil {
 		global.Log.Error("get document by id failed", zap.Error(err))
@@ -111,7 +109,7 @@ func GetDocumentById(id string) (result models.Article) {
 
 func SearchAllDocuments() (result []models.Article) {
 	resp, err := global.Es.Search().
-		Index(article.Index()).
+		Index(models.Article{}.Index()).
 		Query(&types.Query{
 			MatchAll: &types.MatchAllQuery{},
 		}).Do(context.Background())

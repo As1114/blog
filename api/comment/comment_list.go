@@ -8,7 +8,7 @@ import (
 )
 
 type CommentListRequest struct {
-	ArticleID string `form:"id" uri:"id" json:"id"`
+	ID string `form:"id" uri:"id" json:"id"`
 }
 
 func (comment Comment) CommentList(c *gin.Context) {
@@ -18,7 +18,7 @@ func (comment Comment) CommentList(c *gin.Context) {
 		res.FailWithError(err, &req, c)
 		return
 	}
-	commentList := models.FindArticleComment(req.ArticleID)
+	commentList := models.FindArticleComment(req.ID)
 	data := filter.Select("c", commentList)
 	_list, _ := data.(filter.Filter)
 	if string(_list.MustMarshalJSON()) == "{}" {

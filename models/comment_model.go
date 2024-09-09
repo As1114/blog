@@ -13,7 +13,7 @@ type CommentModel struct {
 	DiggCount          int             `gorm:"default:0;comment:点赞数" json:"digg_count,select(c)"`
 	CommentCount       int             `gorm:"default:0;comment:子评论数" json:"comment_count,select(c)"`
 	ArticleID          string          `gorm:"comment:文章id" json:"article_id,select(c)"`
-	User               UserModel       `gorm:"foreignKey:UserID;comment:关联的用户" json:"user,select(c)"`
+	User               UserModel       `gorm:"foreignKey:UserID" json:"user,select(c)"`
 	UserID             uint            `gorm:"comment:关联用户的id" json:"user_id,select(c)"`
 }
 

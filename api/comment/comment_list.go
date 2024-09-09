@@ -3,6 +3,7 @@ package comment
 import (
 	"blog/models"
 	"blog/models/res"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/liu-cn/json-filter/filter"
 )
@@ -20,6 +21,7 @@ func (comment Comment) CommentList(c *gin.Context) {
 	}
 	commentList := models.FindArticleComment(req.ID)
 	data := filter.Select("c", commentList)
+	fmt.Println(data)
 	_list, _ := data.(filter.Filter)
 	if string(_list.MustMarshalJSON()) == "{}" {
 		list := make([]models.CommentModel, 0)

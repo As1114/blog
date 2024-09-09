@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"blog/global"
+	"github.com/axis1114/blog/global"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
 	"github.com/go-playground/locales/zh"

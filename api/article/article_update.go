@@ -1,9 +1,9 @@
 package article
 
 import (
-	"blog/global"
-	"blog/models"
-	"blog/models/res"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models"
+	"github.com/axis1114/blog/models/res"
 	"github.com/gin-gonic/gin"
 	"time"
 )

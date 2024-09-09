@@ -1,11 +1,11 @@
 package search_ser
 
 import (
-	"blog/global"
-	"blog/models"
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"go.uber.org/zap"
 )

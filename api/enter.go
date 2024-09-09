@@ -1,12 +1,12 @@
 package api
 
 import (
-	"blog/api/article"
-	"blog/api/captcha"
-	"blog/api/comment"
-	"blog/api/image"
-	"blog/api/message"
-	"blog/api/user"
+	"github.com/axis1114/blog/api/article"
+	"github.com/axis1114/blog/api/captcha"
+	"github.com/axis1114/blog/api/comment"
+	"github.com/axis1114/blog/api/image"
+	"github.com/axis1114/blog/api/message"
+	"github.com/axis1114/blog/api/user"
 )
 
 type AppGroup struct {

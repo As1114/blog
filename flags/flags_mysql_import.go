@@ -1,7 +1,7 @@
 package flags
 
 import (
-	"blog/global"
+	"github.com/axis1114/blog/global"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/zap"
 	"os"

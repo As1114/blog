@@ -1,7 +1,7 @@
 package res
 
 import (
-	"blog/utils"
+	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

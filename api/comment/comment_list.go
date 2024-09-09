@@ -1,9 +1,9 @@
 package comment
 
 import (
-	"blog/models"
-	"blog/models/res"
 	"fmt"
+	"github.com/axis1114/blog/models"
+	"github.com/axis1114/blog/models/res"
 	"github.com/gin-gonic/gin"
 	"github.com/liu-cn/json-filter/filter"
 )

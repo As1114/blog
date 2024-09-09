@@ -1,9 +1,9 @@
 package flags
 
 import (
-	"blog/global"
 	"bytes"
 	"fmt"
+	"github.com/axis1114/blog/global"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/zap"
 	"os/exec"

@@ -1,8 +1,8 @@
 package core
 
 import (
-	"blog/global"
 	"fmt"
+	"github.com/axis1114/blog/global"
 	"github.com/gin-gonic/gin"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"

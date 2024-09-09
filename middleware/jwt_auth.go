@@ -1,10 +1,10 @@
 package middleware
 
 import (
-	ctype "blog/models/ctype"
-	"blog/models/res"
-	"blog/service/redis_ser"
-	"blog/utils"
+	ctype "github.com/axis1114/blog/models/ctype"
+	"github.com/axis1114/blog/models/res"
+	"github.com/axis1114/blog/service/redis_ser"
+	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
 )
 

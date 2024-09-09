@@ -1,8 +1,8 @@
 package models
 
 import (
-	"blog/global"
 	"context"
+	"github.com/axis1114/blog/global"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/refresh"
 	"go.uber.org/zap"

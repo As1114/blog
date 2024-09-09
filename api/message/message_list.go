@@ -1,11 +1,11 @@
 package message
 
 import (
-	"blog/global"
-	"blog/models"
-	"blog/models/res"
-	"blog/utils"
 	"fmt"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models"
+	"github.com/axis1114/blog/models/res"
+	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
 )
 

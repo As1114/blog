@@ -1,6 +1,6 @@
 package routers
 
-import "blog/api"
+import "github.com/axis1114/blog/api"
 
 func (router RouterGroup) CaptchaRouter() {
 	captchaApi := api.AppGroupApp.CaptchaApi

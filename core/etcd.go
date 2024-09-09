@@ -1,7 +1,7 @@
 package core
 
 import (
-	"blog/global"
+	"github.com/axis1114/blog/global"
 	"go.etcd.io/etcd/clientv3"
 	"go.uber.org/zap"
 	"time"

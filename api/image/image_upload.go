@@ -1,9 +1,9 @@
 package image
 
 import (
-	"blog/global"
-	"blog/models/res"
-	"blog/service/image_ser"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models/res"
+	"github.com/axis1114/blog/service/image_ser"
 	"github.com/gin-gonic/gin"
 	"io/fs"
 	"os"

@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"blog/global"
+	"github.com/axis1114/blog/global"
 	"golang.org/x/crypto/bcrypt"
 )
 

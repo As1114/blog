@@ -1,8 +1,8 @@
 package flags
 
 import (
-	"blog/models"
 	"encoding/json"
+	"github.com/axis1114/blog/models"
 	"github.com/urfave/cli/v2"
 )
 

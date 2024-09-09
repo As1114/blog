@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"blog/api"
-	"blog/middleware"
+	"github.com/axis1114/blog/api"
+	"github.com/axis1114/blog/middleware"
 )
 
 func (router RouterGroup) ImageRouter() {

@@ -1,8 +1,8 @@
 package core
 
 import (
-	"blog/global"
 	"fmt"
+	"github.com/axis1114/blog/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

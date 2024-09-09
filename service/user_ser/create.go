@@ -1,10 +1,10 @@
 package user_ser
 
 import (
-	"blog/global"
-	"blog/models"
-	"blog/models/ctype"
-	"blog/utils"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models"
+	"github.com/axis1114/blog/models/ctype"
+	"github.com/axis1114/blog/utils"
 )
 
 const Avatar = "/upload/avatar/default_avatar.jpg"

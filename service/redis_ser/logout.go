@@ -1,9 +1,9 @@
 package redis_ser
 
 import (
-	"blog/global"
-	"blog/utils"
 	"context"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/utils"
 	"time"
 )
 

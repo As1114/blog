@@ -1,9 +1,9 @@
 package search_ser
 
 import (
-	"blog/global"
-	"blog/models"
 	"fmt"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models"
 	"gorm.io/gorm"
 )
 

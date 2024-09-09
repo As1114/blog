@@ -1,6 +1,6 @@
 package models
 
-import "blog/models/ctype"
+import "github.com/axis1114/blog/models/ctype"
 
 type UserModel struct {
 	MODEL

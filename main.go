@@ -1,16 +1,16 @@
 package main
 
 import (
-	"blog/core"
-	"blog/flags"
-	"blog/global"
-	"blog/routers"
-	"blog/utils"
 	"fmt"
+	"github.com/axis1114/blog/core"
+	"github.com/axis1114/blog/flags"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/routers"
+	"github.com/axis1114/blog/utils"
 	"go.uber.org/zap"
 )
 
-// @title blog
+// @title github.com/axis1114/blog
 // @version 1.0
 // @contact.name Axios
 // @contact.email 1790146932@qq.com

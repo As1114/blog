@@ -1,10 +1,10 @@
 package flags
 
 import (
-	"blog/global"
-	"blog/models"
 	"context"
 	"encoding/json"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/core/bulk"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/zap"

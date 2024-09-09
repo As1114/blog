@@ -1,9 +1,9 @@
 package article
 
 import (
-	"blog/models"
-	"blog/models/res"
-	"blog/service/search_ser"
+	"github.com/axis1114/blog/models"
+	"github.com/axis1114/blog/models/res"
+	"github.com/axis1114/blog/service/search_ser"
 	"github.com/gin-gonic/gin"
 )
 

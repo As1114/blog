@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"blog/global"
 	"fmt"
+	"github.com/axis1114/blog/global"
 	"github.com/gin-gonic/gin"
 	"net"
 )

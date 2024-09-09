@@ -1,4 +1,4 @@
-module blog
+module github.com/axis1114/blog
 
 go 1.22.3
 

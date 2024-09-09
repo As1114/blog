@@ -1,8 +1,8 @@
 package flags
 
 import (
-	"blog/global"
-	"blog/models"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/zap"
 )

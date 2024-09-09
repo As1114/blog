@@ -1,12 +1,12 @@
 package user
 
 import (
-	"blog/global"
-	"blog/models/ctype"
-	"blog/models/res"
-	"blog/service/user_ser"
-	"blog/utils"
 	"fmt"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models/ctype"
+	"github.com/axis1114/blog/models/res"
+	"github.com/axis1114/blog/service/user_ser"
+	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )

@@ -1,8 +1,8 @@
 package captcha
 
 import (
-	"blog/global"
-	"blog/models/res"
+	"github.com/axis1114/blog/global"
+	"github.com/axis1114/blog/models/res"
 	"github.com/gin-gonic/gin"
 	"github.com/mojocn/base64Captcha"
 	"go.uber.org/zap"

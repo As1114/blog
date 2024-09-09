@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"blog/core"
-	_ "blog/docs"
-	"blog/global"
+	"github.com/axis1114/blog/core"
+	_ "github.com/axis1114/blog/docs"
+	"github.com/axis1114/blog/global"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	gs "github.com/swaggo/gin-swagger"

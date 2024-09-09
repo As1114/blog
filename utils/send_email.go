@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"blog/global"
 	"context"
+	"github.com/axis1114/blog/global"
 	"gopkg.in/gomail.v2"
 	"time"
 )

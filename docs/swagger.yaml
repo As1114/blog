@@ -20,7 +20,7 @@ info:
   contact:
     email: 1790146932@qq.com
     name: Axios
-  title: blog
+  title: github.com/axis1114/blog
   version: "1.0"
 paths:
   /api/captcha:

@@ -1,8 +1,8 @@
 package core
 
 import (
-	"blog/global"
 	"context"
+	"github.com/axis1114/blog/global"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 )

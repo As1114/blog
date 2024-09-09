@@ -6,6 +6,7 @@ import (
 	"blog/models/res"
 	"blog/service/search_ser"
 	"blog/utils"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"strconv"
@@ -28,6 +29,7 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		return
 	}
 	_claims, _ := c.Get("claims")
+	fmt.Println(_claims)
 	claims := _claims.(*utils.CustomClaims)
 	userId := claims.UserID
 	html, err := utils.ConvertMarkdownToHTML(req.Content)

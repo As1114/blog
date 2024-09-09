@@ -5,11 +5,12 @@ import (
 	"blog/models"
 	"blog/models/res"
 	"blog/utils"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 type MessageListRequest struct {
-	ID uint `json:"id" url:"id" form:"id"`
+	ID uint `json:"id" uri:"id" form:"id"`
 }
 
 func (m Message) MessageList(c *gin.Context) {
@@ -21,11 +22,11 @@ func (m Message) MessageList(c *gin.Context) {
 	}
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*utils.CustomClaims)
-
+	fmt.Println(claims.UserID, req.ID)
 	var messageList []models.MessageModel
 	err = global.DB.Order("created_at asc").
 		Find(&messageList, "(send_user_id = ? and rec_user_id = ?) or (rec_user_id = ? and send_user_id = ?)",
-			claims.UserID, req.ID).Error
+			claims.UserID, req.ID, claims.UserID, req.ID).Error
 	if err != nil {
 		res.FailWithMessage("暂无消息", c)
 		return

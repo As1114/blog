@@ -9,7 +9,7 @@ import (
 )
 
 type MessageCreateRequest struct {
-	RevUserID uint   `json:"rev_user_id" binding:"required"`
+	RevUserID uint   `json:"rec_user_id" binding:"required"`
 	Content   string `json:"content" binding:"required"`
 }
 

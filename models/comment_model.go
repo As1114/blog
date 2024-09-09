@@ -5,7 +5,7 @@ import (
 )
 
 type CommentModel struct {
-	MODEL
+	MODEL              `json:",select(c)"`
 	SubComments        []*CommentModel `gorm:"foreignKey:ParentCommentID" json:"sub_comments,select(c)"`
 	ParentCommentModel *CommentModel   `gorm:"foreignKey:ParentCommentID" json:"parent_comment_model"`
 	ParentCommentID    *uint           `gorm:"comment:父评论id" json:"parent_comment_id,select(c)"`
@@ -13,8 +13,8 @@ type CommentModel struct {
 	DiggCount          int             `gorm:"default:0;comment:点赞数" json:"digg_count,select(c)"`
 	CommentCount       int             `gorm:"default:0;comment:子评论数" json:"comment_count,select(c)"`
 	ArticleID          string          `gorm:"comment:文章id" json:"article_id,select(c)"`
-	UserID             uint            `gorm:"comment:关联用户的id" json:"user_id,select(c)"`
 	User               UserModel       `gorm:"foreignKey:UserID;comment:关联的用户" json:"user,select(c)"`
+	UserID             uint            `gorm:"comment:关联用户的id" json:"user_id,select(c)"`
 }
 
 func FindAllSubComment(com CommentModel) (subList []CommentModel) {

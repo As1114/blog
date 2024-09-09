@@ -23,6 +23,7 @@ func (comment Comment) CommentCreate(c *gin.Context) {
 		res.FailWithError(err, &req, c)
 		return
 	}
+
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*utils.CustomClaims)
 	exist := search_ser.DocIsExistById(req.ArticleID)
@@ -44,12 +45,16 @@ func (comment Comment) CommentCreate(c *gin.Context) {
 		}
 		global.DB.Model(&parentComment).Update("comment_count", gorm.Expr("comment_count + 1"))
 	}
-	global.DB.Create(&models.CommentModel{
+	err = global.DB.Create(&models.CommentModel{
 		ParentCommentID: req.ParentCommentID,
 		Content:         req.Content,
 		ArticleID:       req.ArticleID,
 		UserID:          claims.UserID,
-	})
+	}).Error
+	if err != nil {
+		res.FailWithMessage("评论失败", c)
+		return
+	}
 	res.OkWithMessage("文章评论成功", c)
 	return
 }

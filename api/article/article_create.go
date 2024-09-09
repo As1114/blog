@@ -4,6 +4,7 @@ import (
 	"blog/global"
 	"blog/models"
 	"blog/models/res"
+	"blog/service/search_ser"
 	"blog/utils"
 	"github.com/gin-gonic/gin"
 	"math/rand"
@@ -81,7 +82,7 @@ func (a Article) ArticleCreate(c *gin.Context) {
 		UserName:   user.Nickname,
 		UserAvatar: user.Avatar,
 	}
-	exist := models.DocIsExistByTitle(req.Title)
+	exist := search_ser.DocIsExistByTitle(req.Title)
 	if exist {
 		res.FailWithMessage("文章已存在", c)
 		return

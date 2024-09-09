@@ -2,7 +2,6 @@ package models
 
 import (
 	"blog/global"
-	"blog/service/search_ser"
 	"context"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/refresh"
@@ -83,20 +82,6 @@ func (a Article) IndexIsExistByJson(index string) bool {
 		global.Log.Error("detect the presence of the index", zap.Error(err))
 	}
 	return resp
-}
-
-func DocIsExistById(id string) bool {
-	res, _ := global.Es.Exists(Article{}.Index(), id).Do(context.Background())
-	return res
-}
-
-func DocIsExistByTitle(title string) bool {
-	res := search_ser.SearchDocumentTerm("title.keyword", title)
-	if len(res) == 0 {
-		return false
-	} else {
-		return true
-	}
 }
 
 func (a Article) DeleteIndex() {

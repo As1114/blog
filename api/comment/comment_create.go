@@ -4,6 +4,7 @@ import (
 	"blog/global"
 	"blog/models"
 	"blog/models/res"
+	"blog/service/search_ser"
 	"blog/utils"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -24,7 +25,7 @@ func (comment Comment) CommentCreate(c *gin.Context) {
 	}
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*utils.CustomClaims)
-	exist := models.DocIsExistById(req.ArticleID)
+	exist := search_ser.DocIsExistById(req.ArticleID)
 	if exist == false {
 		res.FailWithMessage("文章不存在", c)
 		return

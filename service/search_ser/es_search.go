@@ -128,3 +128,17 @@ func SearchAllDocuments() (result []models.Article) {
 	}
 	return result
 }
+
+func DocIsExistByTitle(title string) bool {
+	res := SearchDocumentTerm("title.keyword", title)
+	if len(res) == 0 {
+		return false
+	} else {
+		return true
+	}
+}
+
+func DocIsExistById(id string) bool {
+	res, _ := global.Es.Exists(models.Article{}.Index(), id).Do(context.Background())
+	return res
+}

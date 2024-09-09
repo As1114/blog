@@ -3,6 +3,7 @@ package article
 import (
 	"blog/models"
 	"blog/models/res"
+	"blog/service/search_ser"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,8 +18,7 @@ func (a Article) ArticleList(c *gin.Context) {
 		res.FailWithError(err, &req, c)
 		return
 	}
-	var article models.Article
 	fields := []string{"category"}
-	articles := article.SearchDocumentMultiMatch(fields, req.Key, req.PageInfo)
+	articles := search_ser.SearchDocumentMultiMatch(fields, req.Key, req.PageInfo)
 	res.OkWithList(articles, int64(len(articles)), c)
 }

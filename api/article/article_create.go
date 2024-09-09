@@ -31,11 +31,13 @@ func (a Article) ArticleCreate(c *gin.Context) {
 	userId := claims.UserID
 	html, err := utils.ConvertMarkdownToHTML(req.Content)
 	if err != nil {
+		res.FailWithMessage("文章发布失败", c)
 		global.Log.Error("ConvertMarkdownToHTML err:", err)
 		return
 	}
 	content, err := utils.ConvertHTMLToMarkdown(html)
 	if err != nil {
+		res.FailWithMessage("文章发布失败", c)
 		global.Log.Error("ConvertHTMLToMarkdown err:", err)
 		return
 	}

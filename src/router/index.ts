@@ -4,8 +4,20 @@ import "nprogress/nprogress.css";
 
 
 const router = createRouter({
-    history: createWebHistory("127.0.0.1:8888"),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
+        {
+            path: "/",
+            name: "web_index",
+            component: () => import('../views/web/index.vue'),
+            children: [
+                {
+                    path: "",
+                    name: "web_home",
+                    component: () => import('../views/web/home.vue'),
+                },
+            ]
+        },
     ]
 })
 

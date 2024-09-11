@@ -1,0 +1,6 @@
+body {
+    --main_width: 1200px;
+}
+
+body[arco-theme='dark'] {
+}

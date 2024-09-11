@@ -17,7 +17,6 @@
         </a-layout>
       </main>
       <div class="web_index_footer">
-
       </div>
     </div>
   </div>
@@ -36,7 +35,6 @@ import Common_aside from "@/components/common_aside.vue";
     display: flex;
     flex-direction: column;
     width: 100%;
-    justify-content: center;
     align-items: center;
 
     .web_index_header {
@@ -45,6 +43,11 @@ import Common_aside from "@/components/common_aside.vue";
 
     main {
       width: var(--main_width);
+      height: calc(100% - 60px);
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 }

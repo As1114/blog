@@ -36,7 +36,7 @@ export const useStore = defineStore('counter', {
             } catch (e) {
                 return
             }
-        }
+        },
     },
     getters: {
         themeString(): "light" | "dark" {

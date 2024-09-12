@@ -7,6 +7,11 @@
 <style>
 .web_nav {
   width: 100%;
-  height: 60px;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  align-items: center;
+  display: flex;
+  z-index: 100;
 }
 </style>

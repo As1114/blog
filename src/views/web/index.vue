@@ -5,16 +5,14 @@
         <web_nav></web_nav>
       </div>
       <main>
-        <a-layout>
-          <common_aside></common_aside>
-          <a-layout-content class="web_index_content">
-            <router-view v-slot="{Component}">
-              <transition mode="out-in" name="fade">
-                <component :is="Component"></component>
-              </transition>
-            </router-view>
-          </a-layout-content>
-        </a-layout>
+        <common_aside :class="{collapsed:store.collapsed}"></common_aside>
+        <div class="web_index_content">
+          <router-view v-slot="{Component}">
+            <transition mode="out-in" name="fade">
+              <component :is="Component"></component>
+            </transition>
+          </router-view>
+        </div>
       </main>
       <div class="web_index_footer">
       </div>
@@ -23,10 +21,11 @@
 </template>
 
 <script lang="ts" setup>
-
-
 import Web_nav from "@/components/web/web_nav.vue";
 import Common_aside from "@/components/common_aside.vue";
+import {useStore} from "@/stores";
+
+const store = useStore()
 </script>
 
 <style lang="scss">
@@ -38,15 +37,34 @@ import Common_aside from "@/components/common_aside.vue";
     align-items: center;
 
     .web_index_header {
+      height: 80px;
       width: 100%;
     }
 
     main {
       width: var(--main_width);
-      height: calc(100% - 60px);
+      display: flex;
+      height: calc(100vh - 80px);
 
-      &::-webkit-scrollbar {
-        display: none;
+      .common_aside {
+        width: 200px;
+
+        .arco-layout-sider {
+          height: calc(100vh - 128px);
+          position: fixed;
+        }
+      }
+
+      .common_aside.collapsed {
+        width: 48px;
+
+        & ~ .web_index_content {
+          width: calc(100% - 48px);
+        }
+      }
+
+      .web_index_content {
+        width: calc(100% - 200px);
       }
     }
   }

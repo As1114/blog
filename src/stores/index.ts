@@ -2,17 +2,22 @@ import {defineStore} from 'pinia'
 
 const theme: boolean = true // true light   false  dark
 const collapsed: boolean = false
+const templateCollapsed: boolean = false
 
 export const useStore = defineStore('counter', {
     state() {
         return {
             theme: theme,
             collapsed: collapsed,
+            templateCollapsed: templateCollapsed,
         }
     },
     actions: {
         setCollapsed(collapsed: boolean) {
             this.collapsed = collapsed
+        },
+        setTemplateCollapsed(templateCollapsed: boolean) {
+            this.templateCollapsed = templateCollapsed
         },
         setTheme(localTheme?: boolean) {
             if (localTheme != undefined) {

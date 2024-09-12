@@ -1,10 +1,11 @@
 <template>
-  <div class="common_aside">
+  <div :class="{collapsed:store.collapsed}" class="common_aside">
     <a-layout-sider
       :collapse="store.collapsed"
       :theme="store.themeString"
       collapsible
       @collapse="collapse"
+
     >
       <div class="avatar">
         <a-avatar v-if="store.collapsed" :size="40"><img alt="" loading="lazy" src="/public/images/classroom.jpg">
@@ -43,6 +44,8 @@ function collapse(collapsed: boolean) {
 </script>
 <style>
 .common_aside {
+  width: 200px;
+
   .arco-layout-sider-has-trigger {
     padding-bottom: 0;
 

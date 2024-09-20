@@ -6,7 +6,6 @@
           :autoPlay="true"
           :style="{width: '100%',height: '240px',}"
           animation-name="card"
-          indicator-position="outer"
           show-arrow="hover"
         >
           <a-carousel-item :style="{ width: '60%' }">
@@ -32,13 +31,11 @@ import Web_article_list from "@/components/web/web_article_list.vue";
 </script>
 <style>
 .web_home {
-  width: 100%;
-
   .web_template {
-    width: 100%;
-
     .web_template_content {
       .arco-carousel {
+        background-color: var(--color-bg-1);
+
         img {
           width: 100%;
           height: 100%;

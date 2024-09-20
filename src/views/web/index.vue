@@ -5,7 +5,7 @@
         <web_nav></web_nav>
       </div>
       <main>
-        <common_aside :class="{collapsed:store.collapsed}"></common_aside>
+        <common_aside :class="{collapsed:store.collapsed}" :show-avatar="true" :show-stats="true"></common_aside>
         <div class="web_index_content">
           <router-view v-slot="{Component}">
             <transition mode="out-in" name="fade">
@@ -33,7 +33,6 @@ const store = useStore()
   .web_index {
     display: flex;
     flex-direction: column;
-    width: 100%;
     align-items: center;
 
     .web_index_header {
@@ -45,6 +44,7 @@ const store = useStore()
       width: var(--main_width);
       display: flex;
       height: calc(100vh - 80px);
+      transition: all .3s;
 
       .common_aside {
         width: 200px;

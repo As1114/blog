@@ -27,6 +27,7 @@ function collapse(templateCollapsed: boolean) {
 <style>
 .web_template {
   display: flex;
+  background-color: var(--color-neutral-2);
 
   .web_template_aside {
     width: 200px;

@@ -11,4 +11,8 @@
 <script lang="ts" setup>
 </script>
 <style>
+.web_article_list {
+  background-color: var(--color-bg-1);
+  
+}
 </style>

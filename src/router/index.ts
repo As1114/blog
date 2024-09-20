@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import NProgress from "nprogress";
 
 
 const router = createRouter({
@@ -18,6 +18,18 @@ const router = createRouter({
                 },
             ]
         },
+        {
+            path: "/admin",
+            name: "admin_index",
+            component: () => import('../views/admin/index.vue'),
+            children: [
+                {
+                    path: "",
+                    name: "admin_home",
+                    component: () => import('../views/admin/home/home.vue'),
+                },
+            ]
+        }
     ]
 })
 

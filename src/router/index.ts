@@ -16,6 +16,16 @@ const router = createRouter({
                     name: "web_home",
                     component: () => import('../views/web/home.vue'),
                 },
+                {
+                    path: "article/:id",
+                    name: "article",
+                    component: () => import('../views/web/article.vue'),
+                },
+                {
+                    path: "article/404",
+                    name: "article_notfound",
+                    component: () => import('../views/web/article_notfound.vue'),
+                }
             ]
         },
         {

@@ -21,7 +21,7 @@
         v-model:selected-keys="selectedKeys"
         @menu-item-click="clickMenu"
       >
-        <template v-for="item in menuList" :key="item.name">
+        <template v-for="item in data" :key="item.name">
           <a-menu-item v-if="item.child?.length === 0" :key="item.name">
             {{ item.title }}
             <template #icon>
@@ -59,7 +59,7 @@ const router = useRouter()
 const selectedKeys = ref([route.name])
 let openKeys = ref([route.matched[1].name])
 
-interface MenuType {
+export interface MenuType {
   title: string
   icon: Component
   name: string
@@ -90,6 +90,10 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+const {
+  data = menuList
+} = props
 
 function clickMenu(name: string) {
   router.push({

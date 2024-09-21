@@ -22,7 +22,7 @@ export default defineConfig(({mode}) => {
                     target: serverUrl,
                     changeOrigin: true,
                 },
-                "/uploads": {
+                "/upload": {
                     target: serverUrl,
                     changeOrigin: true,
                 },

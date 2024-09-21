@@ -33,7 +33,7 @@ function collapse(templateCollapsed: boolean) {
     width: 200px;
 
     .arco-layout-sider {
-      height: calc(100vh - 80px);
+      height: 100%;
     }
 
   }

@@ -26,12 +26,12 @@ func (m Message) MessageCreate(c *gin.Context) {
 	claims := _claims.(*utils.CustomClaims)
 	err = global.DB.Take(&sendUser, claims.UserID).Error
 	if err != nil {
-		res.FailWithMessage("发送人不存在", c)
+		res.FailWithMessage("消息发送失败", c)
 		return
 	}
 	err = global.DB.Take(&recUser, req.RevUserID).Error
 	if err != nil {
-		res.FailWithMessage("接收人不存在", c)
+		res.FailWithMessage("消息发送失败", c)
 		return
 	}
 	err = global.DB.Create(&models.MessageModel{
@@ -45,7 +45,6 @@ func (m Message) MessageCreate(c *gin.Context) {
 		Content:          req.Content,
 	}).Error
 	if err != nil {
-		global.Log.Error(err)
 		res.FailWithMessage("消息发送失败", c)
 		return
 	}

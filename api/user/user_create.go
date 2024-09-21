@@ -2,7 +2,6 @@ package user
 
 import (
 	"fmt"
-	"github.com/axis1114/blog/global"
 	"github.com/axis1114/blog/models/ctype"
 	"github.com/axis1114/blog/models/res"
 	"github.com/axis1114/blog/service/user_ser"
@@ -26,8 +25,7 @@ func (u User) UserCreate(c *gin.Context) {
 	account := utils.GenerateID()
 	err := user_ser.CreateUser(req.Nickname, strconv.FormatInt(account, 10), req.Password, c.ClientIP(), req.Role)
 	if err != nil {
-		global.Log.Error("create user error:", err.Error())
-		res.FailWithError(err, &req, c)
+		res.FailWithMessage("创建失败", c)
 		return
 	}
 	res.OkWithMessage(fmt.Sprintf("用户%s创建成功", req.Nickname), c)

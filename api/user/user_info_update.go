@@ -7,7 +7,6 @@ import (
 	"github.com/axis1114/blog/utils"
 	"github.com/fatih/structs"
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
 	"strings"
 )
 
@@ -36,14 +35,13 @@ func (u User) UserInfoUpdate(c *gin.Context) {
 	var user models.UserModel
 	err = global.DB.Take(&user, claims.UserID).Error
 	if err != nil {
-		res.FailWithMessage("用户不存在", c)
+		res.FailWithMessage("更新失败", c)
 		return
 	}
 	err = global.DB.Model(&user).Updates(newMap).Error
 	if err != nil {
-		global.Log.Error("fail to update user info", zap.Error(err))
-		res.FailWithMessage("修改信息失败", c)
+		res.FailWithMessage("更新失败", c)
 		return
 	}
-	res.OkWithMessage("修改信息成功", c)
+	res.OkWithMessage("更新成功", c)
 }

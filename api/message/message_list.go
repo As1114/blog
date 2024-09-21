@@ -9,12 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type MessageListRequest struct {
-	ID uint `json:"id" uri:"id" form:"id"`
-}
-
 func (m Message) MessageList(c *gin.Context) {
-	var req MessageListRequest
+	var req models.MessageSearchRequest
 	err := c.ShouldBindUri(&req)
 	if err != nil {
 		res.FailWithError(err, &req, c)
@@ -28,7 +24,7 @@ func (m Message) MessageList(c *gin.Context) {
 		Find(&messageList, "(send_user_id = ? and rec_user_id = ?) or (rec_user_id = ? and send_user_id = ?)",
 			claims.UserID, req.ID, claims.UserID, req.ID).Error
 	if err != nil {
-		res.FailWithMessage("暂无消息", c)
+		res.FailWithError(err, &messageList, c)
 		return
 	}
 	res.OkWithList(messageList, int64(len(messageList)), c)

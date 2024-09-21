@@ -1,7 +1,6 @@
 package user
 
 import (
-	"github.com/axis1114/blog/global"
 	"github.com/axis1114/blog/models/res"
 	"github.com/axis1114/blog/service/user_ser"
 	"github.com/axis1114/blog/utils"
@@ -14,7 +13,6 @@ func (u User) UserLogout(c *gin.Context) {
 	token := c.Request.Header.Get("token")
 	err := user_ser.Logout(claims, token)
 	if err != nil {
-		global.Log.Warn("注销失败", err.Error())
 		res.FailWithMessage("注销失败", c)
 		return
 	}

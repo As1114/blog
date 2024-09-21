@@ -3,14 +3,18 @@ package search_ser
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/axis1114/blog/global"
 	"github.com/axis1114/blog/models"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"go.uber.org/zap"
 )
 
-func SearchDocumentTerm(field string, key string) (result []models.Article) {
+type ArticleSearchResponse struct {
+	ID    string `json:"id"`
+	Title string `json:"title"`
+}
+
+func SearchDocumentTerm(field, key string) (result []models.Article) {
 	resp, err := global.Es.Search().
 		Index(models.Article{}.Index()).
 		Query(&types.Query{
@@ -21,16 +25,16 @@ func SearchDocumentTerm(field string, key string) (result []models.Article) {
 		Do(context.Background())
 	if err != nil {
 		global.Log.Error("search document failed, err:", zap.Error(err))
-		return
+		return result
 	}
 	for _, hit := range resp.Hits.Hits {
-		var article models.Article
-		err := json.Unmarshal(hit.Source_, &article)
+		var item models.Article
+		err := json.Unmarshal(hit.Source_, &item)
 		if err != nil {
 			global.Log.Error("unmarshal json failed", zap.Error(err))
 			continue
 		}
-		result = append(result, article)
+		result = append(result, item)
 	}
 	return result
 }
@@ -47,18 +51,18 @@ func SearchDocumentTerms(field string, key []string) (result []models.Article) {
 		}).
 		Do(context.Background())
 	if err != nil {
-		fmt.Printf("search document failed, err:%v\n", err)
-		return
+		global.Log.Error("search document failed, err", zap.Error(err))
+		return result
 	}
 	for _, hit := range resp.Hits.Hits {
-		var article models.Article
-		err := json.Unmarshal(hit.Source_, &article)
+		var item models.Article
+		err := json.Unmarshal(hit.Source_, &item)
 		if err != nil {
 			global.Log.Error("unmarshal json failed", zap.Error(err))
 			continue
 		}
 
-		result = append(result, article)
+		result = append(result, item)
 	}
 	return result
 }
@@ -76,55 +80,81 @@ func SearchDocumentMultiMatch(fields []string, key string, pageInfo models.PageI
 		Do(context.Background())
 	if err != nil {
 		global.Log.Error("search document failed", zap.Error(err))
-		return
+		return result
 	}
 	for _, hit := range resp.Hits.Hits {
-		var article models.Article
-		err := json.Unmarshal(hit.Source_, &article)
+		var item models.Article
+		err := json.Unmarshal(hit.Source_, &item)
 		if err != nil {
 			global.Log.Error("unmarshal json failed", zap.Error(err))
 			continue
 		}
-		result = append(result, article)
+		result = append(result, item)
 	}
 	return result
 }
 
-func GetDocumentById(id string) (result models.Article) {
+func SearchDocumentMultiMatchByTitle(fields []string, key string) (result []ArticleSearchResponse) {
+	resp, err := global.Es.Search().
+		Index(models.Article{}.Index()).
+		Query(&types.Query{
+			Match: map[string]types.MatchQuery{
+				"title": {
+					Query: key,
+				},
+			},
+		}).Source_(fields).
+		Do(context.Background())
+	if err != nil {
+		global.Log.Error("search document failed, err:", zap.Error(err))
+		return result
+	}
+	for _, hit := range resp.Hits.Hits {
+		var item ArticleSearchResponse
+		err := json.Unmarshal(hit.Source_, &item)
+		if err != nil {
+			global.Log.Error("unmarshal json failed", zap.Error(err))
+			continue
+		}
+		result = append(result, item)
+	}
+	return result
+}
+
+func GetDocumentById(id string) (result models.Article, err error) {
 	resp, err := global.Es.Get(models.Article{}.Index(), id).
 		Do(context.Background())
 	if err != nil {
 		global.Log.Error("get document by id failed", zap.Error(err))
-		return
+		return result, err
 	}
-	var article models.Article
-	err = json.Unmarshal(resp.Source_, &article)
+	err = json.Unmarshal(resp.Source_, &result)
 	if err != nil {
 		global.Log.Error("unmarshal json failed", zap.Error(err))
-		return
+		return result, err
 	}
-
-	return result
+	return result, nil
 }
 
-func SearchAllDocuments() (result []models.Article) {
+func SearchAllDocuments(pageInfo models.PageInfo) (result []models.Article) {
+	form := (pageInfo.Page - 1) * pageInfo.PageSize
 	resp, err := global.Es.Search().
 		Index(models.Article{}.Index()).
 		Query(&types.Query{
 			MatchAll: &types.MatchAllQuery{},
-		}).Do(context.Background())
+		}).From(form).Size(pageInfo.PageSize).Do(context.Background())
 	if err != nil {
 		global.Log.Error("search all documents failed", zap.Error(err))
-		return
+		return result
 	}
 	for _, hit := range resp.Hits.Hits {
-		var article models.Article
-		err := json.Unmarshal(hit.Source_, &article)
+		var item models.Article
+		err := json.Unmarshal(hit.Source_, &item)
 		if err != nil {
 			global.Log.Error("unmarshal json failed", zap.Error(err))
 			continue
 		}
-		result = append(result, article)
+		result = append(result, item)
 	}
 	return result
 }

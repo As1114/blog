@@ -28,7 +28,7 @@ func (a Article) ArticleUpdate(c *gin.Context) {
 	if req.CoverID != 0 {
 		err = global.DB.Model(models.ImageModel{}).Where("id = ?", req.CoverID).Select("path").Scan(&coverUrl).Error
 		if err != nil {
-			res.FailWithMessage("图片不存在", c)
+			res.FailWithMessage("文章更新失败", c)
 			return
 		}
 	}

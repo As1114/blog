@@ -7,12 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type MessageDeleteRequest struct {
-	ID uint `json:"id" uri:"id" form:"id"`
-}
-
 func (m Message) MessageDelete(c *gin.Context) {
-	var req MessageDeleteRequest
+	var req models.MessageSearchRequest
 	err := c.ShouldBindUri(&req)
 	if err != nil {
 		res.FailWithError(err, &req, c)

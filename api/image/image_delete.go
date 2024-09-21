@@ -18,7 +18,7 @@ func (i Image) ImageDelete(c *gin.Context) {
 	var imageList []models.ImageModel
 	count := global.DB.Find(&imageList, req.IDList).RowsAffected
 	if count == 0 {
-		res.FailWithMessage("图片不存在", c)
+		res.FailWithMessage("图片删除失败", c)
 		return
 	}
 	err = global.DB.Delete(&imageList).Error

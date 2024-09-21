@@ -5,6 +5,7 @@ import (
 	"github.com/axis1114/blog/models/res"
 	"github.com/axis1114/blog/service/image_ser"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"io/fs"
 	"os"
 )
@@ -17,7 +18,7 @@ func (i Image) ImageUpload(c *gin.Context) {
 	}
 	fileList, ok := form.File["images"]
 	if !ok {
-		res.FailWithMessage("文件不存在", c)
+		res.FailWithMessage("图片上传失败", c)
 		return
 	}
 
@@ -26,7 +27,7 @@ func (i Image) ImageUpload(c *gin.Context) {
 	if err != nil {
 		err = os.MkdirAll(basePath, fs.ModePerm)
 		if err != nil {
-			global.Log.Error("make the dir fail", err.Error())
+			res.FailWithMessage("图片上传失败", c)
 			return
 		}
 	}
@@ -41,7 +42,7 @@ func (i Image) ImageUpload(c *gin.Context) {
 		}
 		err = c.SaveUploadedFile(file, serviceRes.FileName)
 		if err != nil {
-			global.Log.Error("save file err:", err)
+			global.Log.Error("save file err:", zap.Error(err))
 			serviceRes.Msg = err.Error()
 			serviceRes.IsSuccess = false
 			resList = append(resList, serviceRes)

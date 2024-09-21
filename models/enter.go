@@ -18,3 +18,11 @@ type MODEL struct {
 type RemoveRequest struct {
 	IDList []uint `json:"id_list"`
 }
+
+type ArticleSearchRequest struct {
+	ID string `json:"id" form:"id" uri:"id"`
+}
+
+type MessageSearchRequest struct {
+	ID uint `json:"id" form:"id" uri:"id"`
+}

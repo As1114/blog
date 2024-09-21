@@ -6,6 +6,7 @@ import (
 	"github.com/axis1114/blog/models/res"
 	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/liu-cn/json-filter/filter"
 )
 
 func (u User) Userinfo(c *gin.Context) {
@@ -14,10 +15,15 @@ func (u User) Userinfo(c *gin.Context) {
 
 	var user models.UserModel
 	if err := global.DB.First(&user, claims.UserID).Error; err != nil {
-		global.Log.Warn("用户不存在", err.Error())
-		res.FailWithMessage("用户不存在", c)
+		global.Log.Error("search err:", err)
 		return
 	}
-
-	res.OkWithData(user, c)
+	data := filter.Select("info", user)
+	_list, _ := data.(filter.Filter)
+	if string(_list.MustMarshalJSON()) == "{}" {
+		user := make([]models.UserModel, 0)
+		res.OkWithData(user, c)
+		return
+	}
+	res.OkWithData(data, c)
 }

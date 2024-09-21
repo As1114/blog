@@ -28,7 +28,7 @@ func (comment Comment) CommentCreate(c *gin.Context) {
 	claims := _claims.(*utils.CustomClaims)
 	exist := search_ser.DocIsExistById(req.ArticleID)
 	if exist == false {
-		res.FailWithMessage("文章不存在", c)
+		res.FailWithMessage("评论失败", c)
 		return
 	}
 
@@ -36,11 +36,11 @@ func (comment Comment) CommentCreate(c *gin.Context) {
 		var parentComment models.CommentModel
 		err = global.DB.Take(&parentComment, req.ParentCommentID).Error
 		if err != nil {
-			res.FailWithMessage("父评论不存在", c)
+			res.FailWithMessage("评论失败", c)
 			return
 		}
 		if parentComment.ArticleID != req.ArticleID {
-			res.FailWithMessage("评论文章不一致", c)
+			res.FailWithMessage("评论失败", c)
 			return
 		}
 		global.DB.Model(&parentComment).Update("comment_count", gorm.Expr("comment_count + 1"))

@@ -1,7 +1,6 @@
 package comment
 
 import (
-	"fmt"
 	"github.com/axis1114/blog/models"
 	"github.com/axis1114/blog/models/res"
 	"github.com/gin-gonic/gin"
@@ -21,7 +20,6 @@ func (comment Comment) CommentList(c *gin.Context) {
 	}
 	commentList := models.FindArticleComment(req.ID)
 	data := filter.Select("c", commentList)
-	fmt.Println(data)
 	_list, _ := data.(filter.Filter)
 	if string(_list.MustMarshalJSON()) == "{}" {
 		list := make([]models.CommentModel, 0)

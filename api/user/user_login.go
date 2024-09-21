@@ -21,18 +21,17 @@ func (u User) UserLogin(c *gin.Context) {
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
 		res.FailWithError(err, &req, c)
+		return
 	}
 	if req.Captcha != "" && req.CaptchaId != "" && captcha.Store.Verify(req.CaptchaId, req.Captcha, true) {
 		var user models.UserModel
 		err = global.DB.Take(&user, "account=?", req.Account).Error
 		if err != nil {
-			global.Log.Warn("用户名或密码错误", err.Error())
 			res.FailWithMessage("用户名或密码错误", c)
 			return
 		}
 		check := utils.CheckPassword(user.Password, req.Password)
 		if !check {
-			global.Log.Warn("用户名或密码错误")
 			res.FailWithMessage("用户名或密码错误", c)
 			return
 		}

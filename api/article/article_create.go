@@ -35,13 +35,11 @@ func (a Article) ArticleCreate(c *gin.Context) {
 	html, err := utils.ConvertMarkdownToHTML(req.Content)
 	if err != nil {
 		res.FailWithMessage("文章发布失败", c)
-		global.Log.Error("ConvertMarkdownToHTML err:", err)
 		return
 	}
 	content, err := utils.ConvertHTMLToMarkdown(html)
 	if err != nil {
 		res.FailWithMessage("文章发布失败", c)
-		global.Log.Error("ConvertHTMLToMarkdown err:", err)
 		return
 	}
 
@@ -59,13 +57,13 @@ func (a Article) ArticleCreate(c *gin.Context) {
 	var coverUrl string
 	err = global.DB.Model(models.ImageModel{}).Where("id = ?", req.CoverID).Select("path").Scan(&coverUrl).Error
 	if err != nil {
-		res.FailWithMessage("图片不存在", c)
+		res.FailWithMessage("文章发布失败", c)
 		return
 	}
 	var user models.UserModel
 	err = global.DB.Where("id = ?", userId).First(&user).Error
 	if err != nil {
-		res.FailWithMessage("用户不存在", c)
+		res.FailWithMessage("文章发布失败", c)
 		return
 	}
 	now := time.Now().Format("2006-01-02 15:04:05")

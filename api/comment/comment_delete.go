@@ -22,7 +22,8 @@ func (comment Comment) CommentDelete(c *gin.Context) {
 	var commentModel models.CommentModel
 	err = global.DB.Take(&commentModel, req.ID).Error
 	if err != nil {
-		res.FailWithMessage("评论不存在", c)
+		res.FailWithMessage("删除失败", c)
+		return
 	}
 
 	subCommentList := models.FindAllSubComment(commentModel)

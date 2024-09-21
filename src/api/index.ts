@@ -26,8 +26,8 @@ export interface paramsType {
 
 // 请求拦截器
 useAxios.interceptors.request.use((config) => {
-    // const store = useStore()
-    // config.headers["token"] = store.userInfo.token
+    const store = useStore()
+    config.headers["token"] = store.userStoreInfo.token
     return config
 })
 

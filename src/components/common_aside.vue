@@ -7,9 +7,9 @@
       @collapse="collapse"
     >
       <div v-if="props.showAvatar" class="avatar">
-        <a-avatar v-if="store.collapsed" :size="40"><img alt="" loading="lazy" src="/public/images/classroom.jpg">
+        <a-avatar v-if="store.collapsed" :size="40"><img :src="store.userStoreInfo.avatar" alt="" loading="lazy">
         </a-avatar>
-        <a-avatar v-else :size="180"><img alt="" loading="lazy" src="/public/images/classroom.jpg"></a-avatar>
+        <a-avatar v-else :size="180"><img :src="store.userStoreInfo.avatar" alt="" loading="lazy"></a-avatar>
       </div>
       <div v-if="props.showStats && !store.collapsed" class="stats">
         <a-statistic :value="123" title="Fans"/>
@@ -116,6 +116,15 @@ function collapse(collapsed: boolean) {
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all .8s;
+
+      img {
+        object-fit: cover;
+      }
+    }
+
+    .avatar:hover {
+      transform: rotate(360deg);
     }
 
     .stats {

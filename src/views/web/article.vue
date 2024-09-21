@@ -34,14 +34,14 @@
 
 <script lang="ts" setup>
 import 'md-editor-v3/lib/preview.css';
-import {reactive, ref} from "vue";
+import {reactive, ref, watch} from "vue";
 import {useStore} from "@/stores";
 import {articleDetail, type articleDetailType} from "@/api/article";
 import {useRoute, useRouter} from "vue-router";
 import {Message} from "@arco-design/web-vue";
 import {dateFormat} from "@/utils/date";
 import Web_template from "@/components/web/web_template.vue";
-import {MdPreview} from "md-editor-v3";
+import {MdPreview} from 'md-editor-v3';
 
 const route = useRoute()
 const router = useRouter()
@@ -49,7 +49,7 @@ const store = useStore()
 const id = ref<string>(route.params.id as string)
 const mdId = "mdpreview"
 
-let data = reactive<articleDetailType>({
+const data = reactive<articleDetailType>({
     abstract: "",
     category: "",
     collects_count: 0,
@@ -72,24 +72,30 @@ let data = reactive<articleDetailType>({
 async function getData() {
   let res = await articleDetail(id.value)
   if (res.code) {
-    Message.info("文章消失了！")
     await router.push({
       name: "article_notfound"
     })
+    Message.info(res.msg)
     return
   }
-  data = res.data
+  Object.assign(data, res.data)
 }
+
+getData()
+
+watch(() => route.params, () => {
+  if (route.params.id) {
+    id.value = route.params.id as string
+    getData()
+  }
+}, {immediate: true, deep: true})
 </script>
 
 <style>
 .article {
-  width: 100%;
-  height: 100%;
-
   .web_template_content {
-    .article_content {
-      .article_content_head {
+    .article_detail {
+      .head {
         max-height: 200px;
 
         .title {
@@ -114,35 +120,6 @@ async function getData() {
           }
         }
       }
-    }
-  }
-
-  .web_template_aside {
-    .preview {
-      width: 100%;
-      margin-bottom: 10px;
-
-      .article_action {
-        margin: 10px;
-      }
-    }
-
-    .article_function {
-      font-size: 24px;
-      display: flex;
-      justify-content: left;
-      margin: 10px;
-
-      .arco-icon {
-        margin-right: 10px;
-      }
-
-    }
-
-    .catalog {
-      margin: 10px;
-      display: flex;
-      justify-content: left;
     }
   }
 

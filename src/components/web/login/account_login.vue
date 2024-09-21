@@ -44,6 +44,7 @@ const loginForm = reactive<userLoginType>({
 
 async function login() {
   let res = await userLogin(loginForm)
+  console.log(res)
   if (res.code) {
     Message.error(res.msg)
     return

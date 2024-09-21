@@ -36,7 +36,7 @@ export function userInfoUpdate(req: userInfoUpdateType): Promise<baseResponse<st
 }
 
 export function userLogout(): Promise<baseResponse<string>> {
-    return useAxios.get("/api/user/logout")
+    return useAxios.post("/api/user/logout")
 }
 
 

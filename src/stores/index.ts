@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia'
-import {userInfo} from "@/api/user";
+import {userInfo, userLogout} from "@/api/user";
 import router from "@/router";
+import {Message} from "@arco-design/web-vue";
 
 const theme: boolean = true // true light   false  dark
 const collapsed: boolean = false
@@ -61,20 +62,29 @@ export const useStore = defineStore('counter', {
                 return
             }
         },
-        logout() {
+        async logout() {
+            let res = await userLogout()
+            if (res.code) {
+                Message.error(res.msg)
+                return
+            }
+            this.clearUserInfo()
+            router.push({name: "web_home"})
+            Message.success(res.msg)
         },
         clearUserInfo() {
             this.userStoreInfo = userStoreInfo;
             localStorage.removeItem("userStoreInfo");
         },
         async setToken(data: any) {
+            this.userStoreInfo.token = data
             let res = await userInfo()
             this.userStoreInfo = {
                 id: res.data.id,
                 nick_name: res.data.nick_name,
                 avatar: res.data.avatar,
                 role: res.data.role,
-                token: data.token,
+                token: data,
             };
             localStorage.setItem("userStoreInfo", JSON.stringify(this.userStoreInfo));
         },

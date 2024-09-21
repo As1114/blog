@@ -57,5 +57,5 @@ export interface articleDetailType {
 }
 
 export function articleDetail(id: string): Promise<baseResponse<articleDetailType>> {
-    return useAxios.get("/api/article/detail" + id)
+    return useAxios.get("/api/article/" + id)
 }

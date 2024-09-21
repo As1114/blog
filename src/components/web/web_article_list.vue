@@ -60,7 +60,6 @@ async function getData(p?: paramsType) {
   let res = await articleList(params)
   data.list = res.data.list
   data.count = res.data.count
-  console.log(data)
 }
 
 function pageChange() {

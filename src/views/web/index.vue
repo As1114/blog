@@ -5,8 +5,9 @@
         <web_nav></web_nav>
       </div>
       <main>
-        <common_aside :class="{collapsed:store.collapsed}" :show-avatar="true" :show-stats="true"></common_aside>
-        <div class="web_index_content">
+        <common_aside v-if="store.isLogin" :class="{collapsed:store.collapsed}" :show-avatar="true"
+                      :show-stats="false"></common_aside>
+        <div :class="{isLogin:!store.isLogin}" class="web_index_content">
           <router-view v-slot="{Component}">
             <transition mode="out-in" name="fade">
               <component :is="Component"></component>
@@ -65,6 +66,10 @@ const store = useStore()
 
       .web_index_content {
         width: calc(100% - 200px);
+      }
+
+      .web_index_content.isLogin {
+        width: 100%;
       }
     }
   }

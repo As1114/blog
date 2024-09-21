@@ -1,6 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import "nprogress/nprogress.css";
 import NProgress from "nprogress";
+import {useStore} from "@/stores";
+import {Message} from "@arco-design/web-vue";
 
 
 const router = createRouter({
@@ -31,6 +33,10 @@ const router = createRouter({
         {
             path: "/admin",
             name: "admin_index",
+            meta: {
+                title: "首页",
+                isAdmin: true,
+            },
             component: () => import('../views/admin/index.vue'),
             children: [
                 {
@@ -46,6 +52,13 @@ const router = createRouter({
 export default router
 
 router.beforeEach((to, from, next) => {
+    const store = useStore()
+    const meta = to.meta
+    if (store.userStoreInfo.role != 1 && (meta.isAdmin)) {
+        Message.warning("权限不足")
+        router.push({name: "web_home"})
+        return
+    }
     NProgress.start()
     next()
 })

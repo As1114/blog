@@ -16,7 +16,7 @@ func (a Article) ArticleDetail(c *gin.Context) {
 	}
 	article, err := search_ser.GetDocumentById(req.ID)
 	if err != nil {
-		res.FailWithError(err, &req, c)
+		res.FailWithMessage("文章消失了", c)
 		return
 	}
 	res.OkWithData(article, c)

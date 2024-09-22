@@ -22,20 +22,17 @@ func main() {
 	global.DB = core.InitGorm()
 	global.Redis = core.InitRedis()
 	global.Es = core.InitEs()
-	global.Etcd = core.InitEtcd()
-	core.InitAddrDB()
+	global.AddrDB = core.InitAddrDB()
 	utils.Init(global.Config.System.StartTime, global.Config.System.MachineID)
 	flags.Newflags()
 	err := utils.InitTrans("en")
 	if err != nil {
-		global.Log.Error("fail to init trans", zap.Error(err))
-		return
+		global.Log.Fatal("fail to init trans", zap.Error(err))
 	}
 	utils.PrintSystem()
 	router := routers.InitRouter()
 	err = router.Run(fmt.Sprintf(":%d", global.Config.System.Port))
 	if err != nil {
-		global.Log.Error("fail to start server", zap.Error(err))
-		return
+		global.Log.Fatal("fail to start server", zap.Error(err))
 	}
 }

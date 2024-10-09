@@ -7,12 +7,10 @@ import { createBrowserRouter } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/",
-    //重定向到/home => element: <Navigate to="/home" replace />,
     element: <Web />,
-    errorElement: <Notfound />,
     children: [
       {
-        path: "home",
+        path: "",
         element: <Home />,
       },
     ],
@@ -20,7 +18,6 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <Admin />,
-    errorElement: <Notfound />,
   },
   {
     path: "*",

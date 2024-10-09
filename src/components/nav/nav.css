@@ -6,8 +6,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 18px;
+  font-size: 24px;
   z-index: 100;
+  background-color: aliceblue;
+  opacity: 0.8;
   .left {
     margin-left: 40px;
   }

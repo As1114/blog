@@ -4,12 +4,8 @@ import "./nav.css";
 export function Nav() {
   return (
     <div className="nav">
-      <div className="left">
-        <Navleft></Navleft>
-      </div>
-      <div className="right">
-        <Navright></Navright>
-      </div>
+      <Navleft></Navleft>
+      <Navright></Navright>
     </div>
   );
 }

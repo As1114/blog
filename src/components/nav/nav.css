@@ -8,10 +8,4 @@
   align-items: center;
   z-index: 100;
   opacity: 0.8;
-  .left {
-    margin-left: 100px;
-  }
-  .right {
-    margin-right: 100px;
-  }
 }

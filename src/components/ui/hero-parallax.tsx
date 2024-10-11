@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { MarqueeDemo } from "../test/marquee";
+import { MarqueeDemo } from "../test/marquee_demo";
 
 export const HeroParallax = ({
   products,

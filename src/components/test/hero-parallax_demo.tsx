@@ -1,19 +1,11 @@
 ﻿"use client";
 import React from "react";
 import { HeroParallax } from "../ui/hero-parallax";
-import { MarqueeDemo } from "./marquee";
-import { AnimatedPinDemo } from "./3d_animated_pin";
+
 export function HeroParallaxDemo() {
   return (
     <div>
       <HeroParallax products={products} />
-      {/* <MarqueeDemo reviews={products}></MarqueeDemo> */}
-      {/* <AnimatedPinDemo
-        title={products[0].title}
-        description={products[0].description}
-        link={products[0].link}
-        thumbnail={products[0].thumbnail}
-      ></AnimatedPinDemo> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-﻿import { HeroParallaxDemo } from "@/components/test/hero-parallax";
+﻿import { HeroParallaxDemo } from "@/components/test/hero-parallax_demo";
 
 export function Home() {
   return (

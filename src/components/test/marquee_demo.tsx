@@ -1,6 +1,6 @@
 ﻿import { cn } from "@/lib/utils";
 import Marquee from "@/components/ui/marquee";
-import { AnimatedPinDemo } from "./3d_animated_pin";
+import { AnimatedPinDemo } from "./3d_animated_pin_demo";
 
 const ReviewCard = ({
   title,

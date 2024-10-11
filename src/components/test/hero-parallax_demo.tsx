@@ -11,35 +11,35 @@ export function HeroParallaxDemo() {
 }
 export const products = [
   {
-    title: "Meam",
+    title: "Meam1",
     description: "1232456",
     link: "https://gomoonbeam.com",
     thumbnail:
       "https://aceternity.com/images/products/thumbnails/new/invoker.png",
   },
   {
-    title: "Meam",
+    title: "Meam2",
     description: "1232456",
     link: "https://gomoonbeam.com",
     thumbnail:
       "https://aceternity.com/images/products/thumbnails/new/invoker.png",
   },
   {
-    title: "Meam",
+    title: "Meam3",
     description: "1232456",
     link: "https://gomoonbeam.com",
     thumbnail:
       "https://aceternity.com/images/products/thumbnails/new/invoker.png",
   },
   {
-    title: "Meam",
+    title: "Meam4",
     description: "1232456",
     link: "https://gomoonbeam.com",
     thumbnail:
       "https://aceternity.com/images/products/thumbnails/new/invoker.png",
   },
   {
-    title: "Meam",
+    title: "Meam5",
     description: "1232456",
     link: "https://gomoonbeam.com",
     thumbnail:

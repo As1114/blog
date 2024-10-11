@@ -38,7 +38,7 @@ export const HeroParallax = ({
 
   // 透明度
   const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.4, 1]),
+    useTransform(scrollYProgress, [0, 0.2], [1, 1]),
     springConfig
   );
 

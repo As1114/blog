@@ -17,4 +17,32 @@ export const products = [
     thumbnail:
       "https://aceternity.com/images/products/thumbnails/new/invoker.png",
   },
+  {
+    title: "Meam",
+    description: "1232456",
+    link: "https://gomoonbeam.com",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/invoker.png",
+  },
+  {
+    title: "Meam",
+    description: "1232456",
+    link: "https://gomoonbeam.com",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/invoker.png",
+  },
+  {
+    title: "Meam",
+    description: "1232456",
+    link: "https://gomoonbeam.com",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/invoker.png",
+  },
+  {
+    title: "Meam",
+    description: "1232456",
+    link: "https://gomoonbeam.com",
+    thumbnail:
+      "https://aceternity.com/images/products/thumbnails/new/invoker.png",
+  },
 ];

@@ -1,8 +1,10 @@
 ﻿import OrbitingCircles from "@/components/ui/orbiting-circles";
+import { ThreeDCardDemo } from "./3d_card_demo";
 
 export function OrbitingCirclesDemo() {
   return (
-    <div className="relative flex h-[calc(100vh-80px)] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background">
+    <div className="relative flex h-[100vh] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background">
+      <ThreeDCardDemo></ThreeDCardDemo>
       {/* Inner Circles */}
       <OrbitingCircles
         className="size-[50px] border-none bg-transparent"
@@ -23,8 +25,8 @@ export function OrbitingCirclesDemo() {
 
       {/* Outer Circles (reverse) */}
       <OrbitingCircles
-        className="size-[80px] border-none bg-transparent"
-        radius={350}
+        className="size-[120px] border-none bg-transparent"
+        radius={330}
         duration={20}
         reverse
       >
@@ -32,7 +34,7 @@ export function OrbitingCirclesDemo() {
       </OrbitingCircles>
       <OrbitingCircles
         className="size-[80px] border-none bg-transparent"
-        radius={350}
+        radius={330}
         duration={20}
         delay={20}
         reverse

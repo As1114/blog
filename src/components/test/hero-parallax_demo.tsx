@@ -24,32 +24,4 @@ export const products = [
     link: "https://gomoonbeam.com",
     thumbnail: "../../../public/images/image.png",
   },
-  {
-    title: "Cursor",
-    link: "https://cursor.so",
-    description: "152465",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
-  },
-  {
-    title: "Jack",
-    link: "https://cursor.so",
-    description: "152465",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
-  },
-  {
-    title: "Jack",
-    link: "https://cursor.so",
-    description: "152465",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
-  },
-  {
-    title: "Jack",
-    link: "https://cursor.so",
-    description: "152465",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
-  },
 ];

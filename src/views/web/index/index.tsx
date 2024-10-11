@@ -1,4 +1,5 @@
-﻿import "./index.css";
+﻿import { Outlet } from "react-router-dom";
+import "./index.css";
 import { Nav } from "@/components/nav/nav";
 
 export function Web() {
@@ -7,7 +8,9 @@ export function Web() {
       <div className="web_nav">
         <Nav></Nav>
       </div>
-      <main></main>
+      <main>
+        <Outlet></Outlet>
+      </main>
     </div>
   );
 }

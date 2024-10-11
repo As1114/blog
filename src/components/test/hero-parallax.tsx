@@ -1,102 +1,63 @@
 ﻿"use client";
 import React from "react";
 import { HeroParallax } from "../ui/hero-parallax";
-
+import { MarqueeDemo } from "./marquee";
+import { AnimatedPinDemo } from "./3d_animated_pin";
 export function HeroParallaxDemo() {
-  return <HeroParallax products={products} />;
+  return (
+    <div>
+      <HeroParallax products={products} />
+      {/* <MarqueeDemo reviews={products}></MarqueeDemo> */}
+      {/* <AnimatedPinDemo
+        title={products[0].title}
+        description={products[0].description}
+        link={products[0].link}
+        thumbnail={products[0].thumbnail}
+      ></AnimatedPinDemo> */}
+    </div>
+  );
 }
 export const products = [
   {
     title: "Moonbeam",
+    description:
+      "152465达瓦伟大伟大·无法达瓦达瓦放大违法·二等功v色如法国撒饿饭·的歌大无法让违法我i非把我i可否把我iu发表·dawefgswergr官方白色帆布萨尔ui发红包斯恶u回复王府井埃斯珀i俄方祭祀热哦帕金斯哦热狗",
     link: "https://gomoonbeam.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/moonbeam.png",
+    thumbnail: "../../../public/images/image.png",
+  },
+  {
+    title: "Meam",
+    description:
+      "152465达瓦伟大伟大·无法达瓦达瓦放大违法·二等功v色如法国撒饿饭·的歌大无法让违法我i非把我i可否把我iu发表·dawefgswergr官方白色帆布萨尔ui发红包斯恶u回复王府井埃斯珀i俄方祭祀热哦帕金斯哦热狗",
+    link: "https://gomoonbeam.com",
+    thumbnail: "../../../public/images/image.png",
   },
   {
     title: "Cursor",
     link: "https://cursor.so",
+    description: "152465",
     thumbnail:
       "https://aceternity.com/images/products/thumbnails/new/cursor.png",
   },
   {
-    title: "Rogue",
-    link: "https://userogue.com",
+    title: "Jack",
+    link: "https://cursor.so",
+    description: "152465",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/rogue.png",
-  },
-
-  {
-    title: "Editorially",
-    link: "https://editorially.org",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/editorially.png",
+      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
   },
   {
-    title: "Editrix AI",
-    link: "https://editrix.ai",
+    title: "Jack",
+    link: "https://cursor.so",
+    description: "152465",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/editrix.png",
+      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
   },
   {
-    title: "Pixel Perfect",
-    link: "https://app.pixelperfect.quest",
+    title: "Jack",
+    link: "https://cursor.so",
+    description: "152465",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/pixelperfect.png",
-  },
-
-  {
-    title: "Algochurn",
-    link: "https://algochurn.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/algochurn.png",
-  },
-  {
-    title: "Aceternity UI",
-    link: "https://ui.aceternity.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/aceternityui.png",
-  },
-  {
-    title: "Tailwind Master Kit",
-    link: "https://tailwindmasterkit.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/tailwindmasterkit.png",
-  },
-  {
-    title: "SmartBridge",
-    link: "https://smartbridgetech.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/smartbridge.png",
-  },
-  {
-    title: "Renderwork Studio",
-    link: "https://renderwork.studio",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/renderwork.png",
-  },
-
-  {
-    title: "Creme Digital",
-    link: "https://cremedigital.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/cremedigital.png",
-  },
-  {
-    title: "Golden Bells Academy",
-    link: "https://goldenbellsacademy.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/goldenbellsacademy.png",
-  },
-  {
-    title: "Invoker Labs",
-    link: "https://invoker.lol",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/invoker.png",
-  },
-  {
-    title: "E Free Invoice",
-    link: "https://efreeinvoice.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/efreeinvoice.png",
+      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
   },
 ];

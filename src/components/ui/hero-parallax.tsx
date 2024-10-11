@@ -27,32 +27,37 @@ export const HeroParallax = ({
     offset: ["start start", "end start"],
   });
 
+  // 定义弹簧配置
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
-  //正面倾斜度
+  // 正面倾斜度
   const rotateX = useSpring(
     useTransform(scrollYProgress, [0, 0.1], [1, 0]),
     springConfig
   );
-  //透明度
+
+  // 透明度
   const opacity = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [0.4, 1]),
     springConfig
   );
-  //倾斜角度
+
+  // 倾斜角度
   const rotateZ = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [10, 0]),
     springConfig
   );
-  //背景位置
+
+  // 背景位置
   const translateY = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [-100, 500]),
     springConfig
   );
+
   return (
     <div
       ref={ref}
-      className="h-[300vh] py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[300vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
     >
       <motion.div
         style={{

@@ -16,7 +16,7 @@ export function AnimatedPinDemo({
 }) {
   const { Paragraph } = Typography;
   return (
-    <div className="h-[250px] w-[300px]">
+    <div className="h-[250px] w-[350px]">
       <PinContainer href={link}>
         <div>
           <h3>{title}</h3>

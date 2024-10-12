@@ -28,7 +28,7 @@ export const PinContainer = ({
 
   return (
     <Link
-      style={{ display: "block", height: "250px", width: "300px" }}
+      style={{ display: "block", height: "250px", width: "350px" }}
       className={cn(
         "relative group/pin z-50  cursor-pointer",
         containerClassName
@@ -48,7 +48,7 @@ export const PinContainer = ({
           style={{
             transform: transform,
           }}
-          className="h-[250px] w-[300px] absolute left-1/2 p-5 top-1/2  flex justify-start items-start  rounded-2xl transition duration-700 overflow-hidden"
+          className="h-[250px] w-[350px] absolute left-1/2 p-5 top-1/2  flex justify-start items-start  rounded-2xl transition duration-700 overflow-hidden"
         >
           <div className={cn("relative z-50 ", className)}>{children}</div>
         </div>

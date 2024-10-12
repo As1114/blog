@@ -90,7 +90,7 @@ export const ProductItem = ({
   return (
     <div className="flex space-x-2">
       <Image
-        style={{ objectFit: "cover", height: "150px", width: "200px" }}
+        style={{ objectFit: "cover", height: "150px", width: "250px" }}
         preview={false}
         src={src}
       />

@@ -1,13 +1,10 @@
 ﻿.nav_left {
-  margin-left: 100px;
   display: flex;
-  width: 50%;
   align-items: center;
   .slogan {
     font-size: 50px;
   }
   .function {
     font-size: 24px;
-    margin-left: 100px;
   }
 }

@@ -14,14 +14,14 @@ function Navbar({ className }: { className?: string }) {
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Blog">
           <ProductItem
-            title="Blog"
+            title="Algochurn"
             src="/public/images/image.png"
             description="Prepare for tech interviews like never before."
           />
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Record">
           <ProductItem
-            title="Record"
+            title="Algochurn"
             src="/public/images/image.png"
             description="Prepare for tech interviews like never before."
           />

@@ -1,5 +1,5 @@
-﻿import { OrbitingCirclesDemo } from "@/components/test/orbiting_circles_demo";
-import "./home.css";
+﻿import "./home.css";
+import { OrbitingCirclesDemo } from "@/components/test/orbiting_circles_demo";
 import { HeroParallaxDemo } from "@/components/test/hero-parallax_demo";
 export function Home() {
   return (

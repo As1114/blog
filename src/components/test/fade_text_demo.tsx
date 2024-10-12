@@ -6,7 +6,7 @@ export function FadeComponentDemo() {
     <FadeComponent
       direction="left"
       framerProps={{
-        show: { transition: { delay: 0.4 } },
+        show: { transition: { delay: 0.8 } },
       }}
     >
       <OrbitingCirclesDemo></OrbitingCirclesDemo>

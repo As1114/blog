@@ -12,7 +12,7 @@ export function ThreeDCardDemo() {
           Hover over this card to unleash the power of CSS perspective
         </CardItem>
         <CardItem translateZ="60">
-          Hover over this card to unleash the power of CSS perspective
+          -----------------------------------------------------------------
         </CardItem>
       </CardBody>
     </CardContainer>

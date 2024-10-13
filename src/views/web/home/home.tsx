@@ -12,9 +12,7 @@ export function Home() {
         }}
         className="circle_fade"
       >
-        <div>左 天气日历 数据</div>
         <OrbitingCirclesDemo></OrbitingCirclesDemo>
-        <div>右 音乐</div>
       </FadeComponent>
       <FadeComponent>
         <HeroParallaxDemo></HeroParallaxDemo>

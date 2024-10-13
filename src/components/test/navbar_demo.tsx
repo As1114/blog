@@ -10,26 +10,13 @@ export function NavbarDemo() {
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   return (
-    <div
-      className={cn(
-        "",
-        className
-      )}
-    >
+    <div className={cn("", className)}>
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Blog">
-          <ProductItem
-            title="Algochurn"
-            src="/public/images/image.png"
-            description="Prepare for tech interviews like never before."
-          />
+          <ProductItem title="Blog" src="" description="" />
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Record">
-          <ProductItem
-            title="Algochurn"
-            src="/public/images/image.png"
-            description="Prepare for tech interviews like never before."
-          />
+          <ProductItem title="Record" src="" description="" />
         </MenuItem>
       </Menu>
     </div>

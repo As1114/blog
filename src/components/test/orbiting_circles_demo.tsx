@@ -3,7 +3,7 @@ import { ThreeDCardDemo } from "./3d_card_demo";
 
 export function OrbitingCirclesDemo() {
   return (
-    <div className="relative flex h-[100vh] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background">
+    <div className="relative flex h-[100vh] w-[1000px] flex-col items-center justify-center overflow-hidden rounded-lg bg-background">
       <ThreeDCardDemo></ThreeDCardDemo>
       {/* Inner Circles */}
       <OrbitingCircles

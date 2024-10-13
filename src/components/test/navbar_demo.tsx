@@ -10,7 +10,12 @@ export function NavbarDemo() {
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   return (
-    <div className={cn("", className)}>
+    <div
+      className={cn(
+        "",
+        className
+      )}
+    >
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Blog">
           <ProductItem

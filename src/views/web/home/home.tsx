@@ -14,9 +14,7 @@ export function Home() {
       >
         <OrbitingCirclesDemo></OrbitingCirclesDemo>
       </FadeComponent>
-      <FadeComponent>
-        <HeroParallaxDemo></HeroParallaxDemo>
-      </FadeComponent>
+      <HeroParallaxDemo></HeroParallaxDemo>
     </div>
   );
 }

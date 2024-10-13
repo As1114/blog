@@ -18,7 +18,7 @@ export function Navright() {
           <Icons.QQ className="size-6" />
         </DockIcon>
         <DockIcon>
-          <Icons.Email className="size-6" />
+          <Icons.email className="size-6" />
         </DockIcon>
       </Dock>
     </div>
@@ -108,7 +108,7 @@ const Icons = {
       ></path>
     </svg>
   ),
-  Email: (props: IconProps) => (
+  email: (props: IconProps) => (
     <svg
       viewBox="0 0 1024 1024"
       version="1.1"

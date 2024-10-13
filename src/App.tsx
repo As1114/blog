@@ -20,7 +20,7 @@ export function App() {
       <BackgroundMedia
         type="video"
         variant="none"
-        src="https://openaicomproductionae4b.blob.core.windows.net/production-twill-01/c74791d0-75d2-48e6-acae-96d13bc97c56/paper-planes.mp4"
+        src="/public/media/185096-874643413.mp4"
       />
       <GlobalPlayButton />
       <div className="app">

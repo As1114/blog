@@ -116,7 +116,7 @@ const Icons = {
       <path
         d="M0.001792 0h1024v1024H0.001792z"
         fill="#1296db"
-        fill-opacity=".01"
+        fillOpacity=".01"
         p-id="17899"
       ></path>
       <path

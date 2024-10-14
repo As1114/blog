@@ -16,7 +16,7 @@ const WebContext = createContext<WebContextType | undefined>(undefined);
 
 export const WebProvider = ({ children }: { children: ReactNode }) => {
   const mediaRef = useRef<HTMLVideoElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const togglePlay = () => {
     if (mediaRef.current) {

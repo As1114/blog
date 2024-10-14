@@ -16,16 +16,16 @@ const GlobalPlayButton = () => {
 };
 export function App() {
   return (
-    <MediaProvider>
-      <BackgroundMedia
-        type="video"
-        variant="none"
-        src="/public/media/185096-874643413.mp4"
-      />
-      <GlobalPlayButton />
+    // <MediaProvider>
+    //   <BackgroundMedia
+    //     type="video"
+    //     variant="none"
+    //     src="/public/media/185096-874643413.mp4"
+    //   />
+    //   <GlobalPlayButton />
       <div className="app">
         <RouterProvider router={router} />
       </div>
-    </MediaProvider>
+    // </MediaProvider>
   );
 }

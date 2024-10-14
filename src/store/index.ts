@@ -1,9 +1,9 @@
 ﻿import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./user";
+import webReducer from "./web_slice";
 
 const store = configureStore({
   reducer: {
-    user: userReducer,
+    web: webReducer,
   },
 });
 

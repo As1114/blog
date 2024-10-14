@@ -6,15 +6,15 @@
   useRef,
 } from "react";
 
-interface MediaContextType {
+interface WebContextType {
   isPlaying: boolean;
   togglePlay: () => void;
   mediaRef: React.RefObject<HTMLVideoElement>;
 }
 
-const MediaContext = createContext<MediaContextType | undefined>(undefined);
+const WebContext = createContext<WebContextType | undefined>(undefined);
 
-export const MediaProvider = ({ children }: { children: ReactNode }) => {
+export const WebProvider = ({ children }: { children: ReactNode }) => {
   const mediaRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -30,16 +30,16 @@ export const MediaProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <MediaContext.Provider value={{ isPlaying, togglePlay, mediaRef }}>
+    <WebContext.Provider value={{ isPlaying, togglePlay, mediaRef }}>
       {children}
-    </MediaContext.Provider>
+    </WebContext.Provider>
   );
 };
 
-export const useMediaContext = () => {
-  const context = useContext(MediaContext);
+export const useWebContext = () => {
+  const context = useContext(WebContext);
   if (!context) {
-    throw new Error("useMediaContext must be used within a MediaProvider");
+    throw new Error("useWebContext must be used within a WebProvider");
   }
   return context;
 };

@@ -2,7 +2,7 @@
 import React from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { useMediaContext } from "../../store/bgmediacontext";
+import { useWebContext } from "@/store/web_context";
 
 // 定义类型
 type OverlayVariant = "none" | "light" | "dark";
@@ -46,7 +46,7 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
   src,
   alt = "",
 }) => {
-  const { mediaRef, isPlaying } = useMediaContext();
+  const { mediaRef, isPlaying } = useWebContext();
 
   // 渲染媒体内容
   const renderMedia = () => {

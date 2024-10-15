@@ -14,14 +14,12 @@ func Init(startTime string, machineID int64) {
 	var st time.Time
 	st, err := time.Parse("2006-01-02", startTime)
 	if err != nil {
-		global.Log.Error("parse start time error:", zap.Error(err))
-		return
+		global.Log.Fatal("parse start time error:", zap.Error(err))
 	}
 	sf.Epoch = st.UnixNano() / 1000000
 	node, err = sf.NewNode(machineID)
 	if err != nil {
-		global.Log.Error("new node error:", err.Error())
-		return
+		global.Log.Fatal("new node error:", zap.Error(err))
 	}
 }
 func GenerateID() int64 {

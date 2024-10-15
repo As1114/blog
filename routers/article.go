@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"github.com/axis1114/blog/api"
-	"github.com/axis1114/blog/middleware"
+	"github.com/nsxz1114/blog/api"
+	"github.com/nsxz1114/blog/middleware"
 )
 
 func (router RouterGroup) ArticleRouter() {

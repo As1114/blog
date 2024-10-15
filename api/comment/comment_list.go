@@ -1,10 +1,10 @@
 package comment
 
 import (
-	"github.com/axis1114/blog/models"
-	"github.com/axis1114/blog/models/res"
 	"github.com/gin-gonic/gin"
 	"github.com/liu-cn/json-filter/filter"
+	"github.com/nsxz1114/blog/models"
+	"github.com/nsxz1114/blog/models/res"
 )
 
 type CommentListRequest struct {

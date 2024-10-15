@@ -3,7 +3,7 @@ package flags
 import (
 	"bytes"
 	"fmt"
-	"github.com/axis1114/blog/global"
+	"github.com/nsxz1114/blog/global"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/zap"
 	"os/exec"

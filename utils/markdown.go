@@ -3,7 +3,7 @@ package utils
 import (
 	md "github.com/JohannesKaufmann/html-to-markdown"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/axis1114/blog/global"
+	"github.com/nsxz1114/blog/global"
 	"github.com/russross/blackfriday"
 	"strings"
 )

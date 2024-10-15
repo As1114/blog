@@ -1,7 +1,7 @@
 package flags
 
 import (
-	"github.com/axis1114/blog/global"
+	"github.com/nsxz1114/blog/global"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/zap"
 	"os"
@@ -42,8 +42,8 @@ import (
 
 func Newflags() {
 	var app = cli.NewApp()
-	app.Name = "github.com/axis1114/blog"
-	app.Usage = "github.com/axis1114/blog"
+	app.Name = "github.com/nsxz1114/blog"
+	app.Usage = "github.com/nsxz1114/blog"
 	app.Authors = []*cli.Author{
 		{
 			Name:  "Axios",

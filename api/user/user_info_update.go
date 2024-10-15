@@ -1,12 +1,12 @@
 package user
 
 import (
-	"github.com/axis1114/blog/global"
-	"github.com/axis1114/blog/models"
-	"github.com/axis1114/blog/models/res"
-	"github.com/axis1114/blog/utils"
 	"github.com/fatih/structs"
 	"github.com/gin-gonic/gin"
+	"github.com/nsxz1114/blog/global"
+	"github.com/nsxz1114/blog/models"
+	"github.com/nsxz1114/blog/models/res"
+	"github.com/nsxz1114/blog/utils"
 	"strings"
 )
 

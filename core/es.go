@@ -2,8 +2,8 @@ package core
 
 import (
 	"fmt"
-	"github.com/axis1114/blog/global"
 	"github.com/elastic/go-elasticsearch/v8"
+	"github.com/nsxz1114/blog/global"
 )
 
 func InitEs() *elasticsearch.TypedClient {

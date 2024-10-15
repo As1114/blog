@@ -1,12 +1,12 @@
 package user
 
 import (
-	"github.com/axis1114/blog/api/captcha"
-	"github.com/axis1114/blog/global"
-	"github.com/axis1114/blog/models"
-	"github.com/axis1114/blog/models/res"
-	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/nsxz1114/blog/api/captcha"
+	"github.com/nsxz1114/blog/global"
+	"github.com/nsxz1114/blog/models"
+	"github.com/nsxz1114/blog/models/res"
+	"github.com/nsxz1114/blog/utils"
 )
 
 type UserLoginRequest struct {

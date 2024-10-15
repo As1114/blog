@@ -1,9 +1,9 @@
 package core
 
 import (
-	"github.com/axis1114/blog/global"
 	"github.com/gin-gonic/gin"
 	"github.com/natefinch/lumberjack"
+	"github.com/nsxz1114/blog/global"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"log"

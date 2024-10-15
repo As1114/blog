@@ -1,6 +1,6 @@
 package models
 
-import "github.com/axis1114/blog/models/ctype"
+import "github.com/nsxz1114/blog/models/ctype"
 
 type UserModel struct {
 	MODEL    `json:",select(info)"`

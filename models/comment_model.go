@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/axis1114/blog/global"
+	"github.com/nsxz1114/blog/global"
 )
 
 type CommentModel struct {

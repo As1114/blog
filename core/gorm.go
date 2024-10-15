@@ -2,7 +2,7 @@ package core
 
 import (
 	"fmt"
-	"github.com/axis1114/blog/global"
+	"github.com/nsxz1114/blog/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

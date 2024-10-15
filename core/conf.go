@@ -2,8 +2,8 @@ package core
 
 import (
 	"fmt"
-	"github.com/axis1114/blog/global"
 	"github.com/fsnotify/fsnotify"
+	"github.com/nsxz1114/blog/global"
 	"github.com/spf13/viper"
 	"log"
 )

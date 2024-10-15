@@ -1,8 +1,8 @@
 package user_ser
 
 import (
-	"github.com/axis1114/blog/service/redis_ser"
-	"github.com/axis1114/blog/utils"
+	"github.com/nsxz1114/blog/service/redis_ser"
+	"github.com/nsxz1114/blog/utils"
 	"time"
 )
 

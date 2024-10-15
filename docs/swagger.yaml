@@ -20,22 +20,22 @@ info:
   contact:
     email: 1790146932@qq.com
     name: Axios
-  title: github.com/axis1114/blog
+  title: github.com/nsxz1114/blog
   version: "1.0"
 paths:
   /api/captcha:
     get:
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/res.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/captcha.CaptchaResponse'
-              type: object
+              - $ref: "#/definitions/res.Response"
+              - properties:
+                  data:
+                    $ref: "#/definitions/captcha.CaptchaResponse"
+                type: object
       summary: 验证码生成
 swagger: "2.0"

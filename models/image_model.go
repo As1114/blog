@@ -1,8 +1,8 @@
 package models
 
 import (
-	"github.com/axis1114/blog/global"
-	"github.com/axis1114/blog/models/ctype"
+	"github.com/nsxz1114/blog/global"
+	"github.com/nsxz1114/blog/models/ctype"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 	"os"

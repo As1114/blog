@@ -2,7 +2,7 @@ package utils
 
 import (
 	"context"
-	"github.com/axis1114/blog/global"
+	"github.com/nsxz1114/blog/global"
 	"gopkg.in/gomail.v2"
 	"time"
 )

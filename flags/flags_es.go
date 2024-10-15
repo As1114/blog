@@ -2,7 +2,7 @@ package flags
 
 import (
 	"encoding/json"
-	"github.com/axis1114/blog/models"
+	"github.com/nsxz1114/blog/models"
 	"github.com/urfave/cli/v2"
 )
 

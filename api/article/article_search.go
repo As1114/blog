@@ -1,9 +1,9 @@
 package article
 
 import (
-	"github.com/axis1114/blog/models/res"
-	"github.com/axis1114/blog/service/search_ser"
 	"github.com/gin-gonic/gin"
+	"github.com/nsxz1114/blog/models/res"
+	"github.com/nsxz1114/blog/service/search_ser"
 )
 
 type ArticleSearchRequest struct {

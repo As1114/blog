@@ -1,10 +1,10 @@
 package image
 
 import (
-	"github.com/axis1114/blog/global"
-	"github.com/axis1114/blog/models/res"
-	"github.com/axis1114/blog/service/image_ser"
 	"github.com/gin-gonic/gin"
+	"github.com/nsxz1114/blog/global"
+	"github.com/nsxz1114/blog/models/res"
+	"github.com/nsxz1114/blog/service/image_ser"
 	"go.uber.org/zap"
 	"io/fs"
 	"os"

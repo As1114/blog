@@ -2,10 +2,10 @@ package image
 
 import (
 	"fmt"
-	"github.com/axis1114/blog/global"
-	"github.com/axis1114/blog/models"
-	"github.com/axis1114/blog/models/res"
 	"github.com/gin-gonic/gin"
+	"github.com/nsxz1114/blog/global"
+	"github.com/nsxz1114/blog/models"
+	"github.com/nsxz1114/blog/models/res"
 )
 
 func (i Image) ImageDelete(c *gin.Context) {

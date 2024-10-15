@@ -1,8 +1,8 @@
 package res
 
 import (
-	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/nsxz1114/blog/utils"
 	"net/http"
 )
 

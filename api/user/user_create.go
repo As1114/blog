@@ -2,11 +2,11 @@ package user
 
 import (
 	"fmt"
-	"github.com/axis1114/blog/models/ctype"
-	"github.com/axis1114/blog/models/res"
-	"github.com/axis1114/blog/service/user_ser"
-	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/nsxz1114/blog/models/ctype"
+	"github.com/nsxz1114/blog/models/res"
+	"github.com/nsxz1114/blog/service/user_ser"
+	"github.com/nsxz1114/blog/utils"
 	"strconv"
 )
 

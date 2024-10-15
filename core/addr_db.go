@@ -1,9 +1,9 @@
 package core
 
 import (
-	"github.com/axis1114/blog/global"
 	"github.com/cc14514/go-geoip2"
 	geoip2db "github.com/cc14514/go-geoip2-db"
+	"github.com/nsxz1114/blog/global"
 	"go.uber.org/zap"
 )
 

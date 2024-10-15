@@ -2,8 +2,8 @@ package utils
 
 import (
 	"errors"
-	"github.com/axis1114/blog/global"
 	"github.com/dgrijalva/jwt-go/v4"
+	"github.com/nsxz1114/blog/global"
 	"time"
 )
 

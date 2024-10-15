@@ -1,9 +1,9 @@
 package global
 
 import (
-	"github.com/axis1114/blog/config"
 	"github.com/cc14514/go-geoip2"
 	"github.com/elastic/go-elasticsearch/v8"
+	"github.com/nsxz1114/blog/config"
 	"github.com/redis/go-redis/v9"
 	"go.etcd.io/etcd/clientv3"
 	"go.uber.org/zap"

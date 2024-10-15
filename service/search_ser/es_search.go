@@ -3,9 +3,9 @@ package search_ser
 import (
 	"context"
 	"encoding/json"
-	"github.com/axis1114/blog/global"
-	"github.com/axis1114/blog/models"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
+	"github.com/nsxz1114/blog/global"
+	"github.com/nsxz1114/blog/models"
 	"go.uber.org/zap"
 )
 

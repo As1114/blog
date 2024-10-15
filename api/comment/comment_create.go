@@ -1,12 +1,12 @@
 package comment
 
 import (
-	"github.com/axis1114/blog/global"
-	"github.com/axis1114/blog/models"
-	"github.com/axis1114/blog/models/res"
-	"github.com/axis1114/blog/service/search_ser"
-	"github.com/axis1114/blog/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/nsxz1114/blog/global"
+	"github.com/nsxz1114/blog/models"
+	"github.com/nsxz1114/blog/models/res"
+	"github.com/nsxz1114/blog/service/search_ser"
+	"github.com/nsxz1114/blog/utils"
 	"gorm.io/gorm"
 )
 

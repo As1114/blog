@@ -5,6 +5,7 @@ import BackgroundMedia from "@/components/ui/backgroundmedia";
 import { WebProvider } from "@/store/web_context";
 
 export function Web() {
+
   return (
     <WebProvider>
       <BackgroundMedia
@@ -21,3 +22,4 @@ export function Web() {
     </WebProvider>
   );
 }
+

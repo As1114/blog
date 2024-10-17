@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Sidebar, SidebarBody } from "../ui/sidebar";
 import { cn } from "@/lib/utils";
+import { Side } from "../side/side";
 
 export function SidebarDemo() {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,9 @@ export function SidebarDemo() {
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between gap-10"></SidebarBody>
+        <SidebarBody className="justify-between gap-10">
+          <Side open={open}></Side>
+        </SidebarBody>
       </Sidebar>
       <Dashboard />
     </div>

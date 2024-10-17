@@ -1,6 +1,5 @@
 ﻿import "./nav_left.css";
 import { NavbarDemo } from "../test/navbar_demo";
-import { ConfettiDemo } from "../test/confettid_demo";
 
 export function Navleft() {
   return (

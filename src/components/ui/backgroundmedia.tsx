@@ -46,8 +46,7 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
   src,
   alt = "",
 }) => {
-  const { mediaRef, isPlaying } = useWebContext();
-
+  const { mediaRef } = useWebContext();
   // 渲染媒体内容
   const renderMedia = () => {
     const commonProps = {
@@ -90,13 +89,6 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
       )}
     >
       {renderMedia()}
-      {type === "video" && (
-        <div className="absolute bottom-4 right-4 z-50">
-          <span className="px-4 py-2 bg-gray-900 text-white hover:bg-gray-700">
-            {isPlaying ? "Playing" : "Paused"}
-          </span>
-        </div>
-      )}
     </div>
   );
 };

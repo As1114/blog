@@ -8,7 +8,7 @@ export function Home() {
       <FadeComponent
         direction="left"
         framerProps={{
-          show: { transition: { delay: 0.8 } },
+          show: { transition: { delay: 0.5 } },
         }}
         className="circle_fade"
       >

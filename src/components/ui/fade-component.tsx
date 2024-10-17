@@ -13,36 +13,25 @@ type FadeComponentProps = {
 export function FadeComponent({
   direction = "up",
   className,
-  framerProps = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { type: "spring" } },
-  },
+  framerProps,
   children,
 }: FadeComponentProps) {
-  const directionOffset = useMemo(() => {
-    const map = { up: 50, down: -50, left: -50, right: 50 };
-    return map[direction];
-  }, [direction]);
-
+  // 提取默认方向的偏移值，避免在useMemo中进行
+  const directionOffset = direction === "up" || direction === "right" ? 50 : -50;
   const axis = direction === "up" || direction === "down" ? "y" : "x";
 
+  // 优化动画配置，减少多次解构和属性覆盖
   const FADE_ANIMATION_VARIANTS = useMemo(() => {
-    const { hidden, show, ...rest } = framerProps as {
-      [name: string]: { [name: string]: number; opacity: number };
+    const defaultVariants: Variants = {
+      hidden: { opacity: 0, [axis]: directionOffset },
+      show: { opacity: 1, [axis]: 0, transition: { type: "spring" } },
     };
 
     return {
-      ...rest,
-      hidden: {
-        ...(hidden ?? {}),
-        opacity: hidden?.opacity ?? 0,
-        [axis]: hidden?.[axis] ?? directionOffset,
-      },
-      show: {
-        ...(show ?? {}),
-        opacity: show?.opacity ?? 1,
-        [axis]: show?.[axis] ?? 0,
-      },
+      ...defaultVariants,
+      ...framerProps,
+      hidden: { ...defaultVariants.hidden, ...(framerProps?.hidden || {}) },
+      show: { ...defaultVariants.show, ...(framerProps?.show || {}) },
     };
   }, [directionOffset, axis, framerProps]);
 
@@ -52,8 +41,9 @@ export function FadeComponent({
       animate="show"
       viewport={{ once: true }}
       variants={FADE_ANIMATION_VARIANTS}
+      className={className}
     >
-      <motion.div className={className}>{children}</motion.div>
+      {children}
     </motion.div>
   );
 }

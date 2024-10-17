@@ -2,7 +2,7 @@
 import { Outlet } from "react-router-dom";
 import { Nav } from "@/components/nav/nav";
 import BackgroundMedia from "@/components/ui/backgroundmedia";
-import { useWebContext, WebProvider } from "@/store/web_context";
+import { WebProvider } from "@/store/web_context";
 
 export function Web() {
   return (

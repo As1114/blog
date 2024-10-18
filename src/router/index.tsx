@@ -3,6 +3,7 @@ import { Web } from "@/views/web/index";
 import { Home } from "@/views/web/home/home";
 import Notfound from "@/views/web/not_found/not_found";
 import { createBrowserRouter } from "react-router-dom";
+import { Timeline } from "@/views/web/timeline/timeline";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "timeline",
+        element: <Timeline />,
       },
     ],
   },
